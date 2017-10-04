@@ -18,10 +18,10 @@ class ViewController: UIViewController {
     @IBOutlet var previewBG: UIImageView!
     @IBOutlet var pressedAnywhereButton: UIButton!
     @IBOutlet var pressAnywhereToStart: UILabel!
-    @IBOutlet var chessPreviewLabel: UILabel!
+    @IBOutlet var chessPreviewTitle: UIImageView!
     
     @IBOutlet var menuBG: UIImageView!
-    @IBOutlet var chessMenuLabel: UILabel!
+    @IBOutlet var chessMenuTitle: UIImageView!
     @IBOutlet var onePlayerButton: UIButton!
     @IBOutlet var twoPlayersButton: UIButton!
     @IBOutlet var settingsButton: UIButton!
@@ -44,7 +44,7 @@ class ViewController: UIViewController {
         
         pressAnywhereToStart.alpha = 0
         menuBG.alpha = 0
-        chessMenuLabel.alpha = 0
+        chessMenuTitle.alpha = 0
         onePlayerButton.alpha = 0
         twoPlayersButton.alpha = 0
         settingsButton.alpha = 0
@@ -140,13 +140,13 @@ class ViewController: UIViewController {
         
         if (changed == false) {
             previewBG.alpha = previewAlpha - 0.01
-            chessPreviewLabel.alpha = previewAlpha - 0.01
+            chessPreviewTitle.alpha = previewAlpha - 0.01
             pressAnywhereToStart.alpha = pressAnywhereAlpha - 0.01
             
         }
         else {
             menuBG.alpha = menuAlpha + 0.01
-            chessMenuLabel.alpha = menuAlpha + 0.01
+            chessMenuTitle.alpha = menuAlpha + 0.01
             onePlayerButton.alpha = menuAlpha + 0.01
             twoPlayersButton.alpha = menuAlpha + 0.01
             settingsButton.alpha = menuAlpha + 0.01

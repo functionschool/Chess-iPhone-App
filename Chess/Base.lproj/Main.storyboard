@@ -25,17 +25,12 @@
                                 <rect key="frame" x="446" y="0.0" width="414" height="736"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="CHESS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lli-vm-L2C">
-                                <rect key="frame" x="-2" y="276" width="379" height="115"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ChessTitle.png" translatesAutoresizingMaskIntoConstraints="NO" id="eoV-w4-agc">
+                                <rect key="frame" x="16" y="290" width="343" height="87"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="BodoniSvtyTwoITCTT-Bold" family="Bodoni 72" pointSize="115"/>
-                                <color key="textColor" red="0.89563091011608353" green="0.71647444716821962" blue="0.24252446499130878" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                                <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <size key="shadowOffset" width="-3" height="3"/>
-                            </label>
+                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Press anywhere to start." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lh8-NF-DLf">
-                                <rect key="frame" x="87" y="390" width="201" height="21"/>
+                                <rect key="frame" x="87" y="378" width="201" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.60000002379999995" green="0.60000002379999995" blue="0.60000002379999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -52,15 +47,10 @@
                                 <rect key="frame" x="-2" y="0.0" width="379" height="667"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="CHESS" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kjC-Fy-YOl">
-                                <rect key="frame" x="16" y="20" width="343" height="73"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ChessTitle.png" translatesAutoresizingMaskIntoConstraints="NO" id="fO0-Nj-saG">
+                                <rect key="frame" x="153" y="20" width="206" height="73"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="BodoniSvtyTwoITCTT-Bold" family="Bodoni 72" pointSize="69"/>
-                                <color key="textColor" red="0.8942750096321106" green="0.71628540754318237" blue="0.2440916895866394" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                                <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <size key="shadowOffset" width="-2" height="2"/>
-                            </label>
+                            </imageView>
                             <button opaque="NO" alpha="0.94999999999999996" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G8W-eb-Vsi">
                                 <rect key="frame" x="191" y="276" width="168" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -98,8 +88,8 @@
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <connections>
-                        <outlet property="chessMenuLabel" destination="kjC-Fy-YOl" id="CDF-R4-feU"/>
-                        <outlet property="chessPreviewLabel" destination="Lli-vm-L2C" id="rMS-cQ-bgH"/>
+                        <outlet property="chessMenuTitle" destination="fO0-Nj-saG" id="BdD-iA-TZa"/>
+                        <outlet property="chessPreviewTitle" destination="eoV-w4-agc" id="Gsn-J5-R8L"/>
                         <outlet property="menuBG" destination="Ffi-xC-oNI" id="grS-Qz-aDR"/>
                         <outlet property="onePlayerButton" destination="G8W-eb-Vsi" id="7m1-OW-psn"/>
                         <outlet property="pressAnywhereToStart" destination="Lh8-NF-DLf" id="xY4-o0-yJL"/>
@@ -467,6 +457,7 @@
     <resources>
         <image name="Background1.png" width="1920" height="1080"/>
         <image name="Background3.png" width="604" height="1075"/>
+        <image name="ChessTitle.png" width="787" height="188"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="gzi-dP-jYG"/>

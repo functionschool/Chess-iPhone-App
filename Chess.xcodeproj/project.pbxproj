@@ -21,6 +21,7 @@
 		A53AC1331F84A1F90098EE59 /* StartScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53AC1321F84A1F90098EE59 /* StartScreen.swift */; };
 		A53AC1351F84A6910098EE59 /* Knight.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53AC1341F84A6910098EE59 /* Knight.swift */; };
 		A53AC1371F84A74E0098EE59 /* GameScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53AC1361F84A74E0098EE59 /* GameScreen.swift */; };
+		A53AC1391F8531CF0098EE59 /* ChessTitle.png in Resources */ = {isa = PBXBuildFile; fileRef = A53AC1381F8531CF0098EE59 /* ChessTitle.png */; };
 		A5B229C81F8441E8009FF359 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B229C71F8441E8009FF359 /* AppDelegate.swift */; };
 		A5B229CA1F8441E8009FF359 /* MenuScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B229C91F8441E8009FF359 /* MenuScreen.swift */; };
 		A5B229CD1F8441E8009FF359 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5B229CB1F8441E8009FF359 /* Main.storyboard */; };
@@ -48,6 +49,7 @@
 		A53AC1321F84A1F90098EE59 /* StartScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartScreen.swift; sourceTree = "<group>"; };
 		A53AC1341F84A6910098EE59 /* Knight.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Knight.swift; sourceTree = "<group>"; };
 		A53AC1361F84A74E0098EE59 /* GameScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScreen.swift; sourceTree = "<group>"; };
+		A53AC1381F8531CF0098EE59 /* ChessTitle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChessTitle.png; sourceTree = "<group>"; };
 		A5B229C41F8441E8009FF359 /* Chess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chess.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5B229C71F8441E8009FF359 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A5B229C91F8441E8009FF359 /* MenuScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuScreen.swift; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 				A5B229E01F844244009FF359 /* Background2.png */,
 				A5B229E21F84424C009FF359 /* Background3.png */,
 				A5B229E41F8444E7009FF359 /* Halo.mp3 */,
+				A53AC1381F8531CF0098EE59 /* ChessTitle.png */,
 			);
 			sourceTree = "<group>";
 		};
@@ -182,6 +185,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5B229D51F8441E8009FF359 /* LaunchScreen.storyboard in Resources */,
+				A53AC1391F8531CF0098EE59 /* ChessTitle.png in Resources */,
 				A5B229E51F8444E7009FF359 /* Halo.mp3 in Resources */,
 				A5B229D21F8441E8009FF359 /* Assets.xcassets in Resources */,
 				A5B229CD1F8441E8009FF359 /* Main.storyboard in Resources */,

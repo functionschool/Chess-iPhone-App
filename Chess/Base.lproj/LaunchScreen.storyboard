@@ -25,15 +25,10 @@
                                 <rect key="frame" x="446" y="0.0" width="414" height="736"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="CHESS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sg6-9A-8MN">
-                                <rect key="frame" x="-2" y="276" width="379" height="115"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ChessTitle.png" translatesAutoresizingMaskIntoConstraints="NO" id="5bG-pm-JXy">
+                                <rect key="frame" x="16" y="290" width="343" height="87"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="BodoniSvtyTwoITCTT-Bold" family="Bodoni 72" pointSize="115"/>
-                                <color key="textColor" red="0.89563091009999996" green="0.71647444719999998" blue="0.24252446499999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                                <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <size key="shadowOffset" width="-3" height="3"/>
-                            </label>
+                            </imageView>
                         </subviews>
                     </view>
                 </viewController>
@@ -44,5 +39,6 @@
     </scenes>
     <resources>
         <image name="Background1.png" width="1920" height="1080"/>
+        <image name="ChessTitle.png" width="787" height="188"/>
     </resources>
 </document>
