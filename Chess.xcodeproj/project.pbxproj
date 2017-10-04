@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A5B229C81F8441E8009FF359 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B229C71F8441E8009FF359 /* AppDelegate.swift */; };
-		A5B229CA1F8441E8009FF359 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B229C91F8441E8009FF359 /* ViewController.swift */; };
+		A5B229CA1F8441E8009FF359 /* MenuScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B229C91F8441E8009FF359 /* MenuScreen.swift */; };
 		A5B229CD1F8441E8009FF359 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5B229CB1F8441E8009FF359 /* Main.storyboard */; };
 		A5B229D01F8441E8009FF359 /* Chess.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A5B229CE1F8441E8009FF359 /* Chess.xcdatamodeld */; };
 		A5B229D21F8441E8009FF359 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5B229D11F8441E8009FF359 /* Assets.xcassets */; };
@@ -22,7 +22,7 @@
 /* Begin PBXFileReference section */
 		A5B229C41F8441E8009FF359 /* Chess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chess.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5B229C71F8441E8009FF359 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A5B229C91F8441E8009FF359 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A5B229C91F8441E8009FF359 /* MenuScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuScreen.swift; sourceTree = "<group>"; };
 		A5B229CC1F8441E8009FF359 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A5B229CF1F8441E8009FF359 /* Chess.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Chess.xcdatamodel; sourceTree = "<group>"; };
 		A5B229D11F8441E8009FF359 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -69,7 +69,7 @@
 			isa = PBXGroup;
 			children = (
 				A5B229C71F8441E8009FF359 /* AppDelegate.swift */,
-				A5B229C91F8441E8009FF359 /* ViewController.swift */,
+				A5B229C91F8441E8009FF359 /* MenuScreen.swift */,
 				A5B229CB1F8441E8009FF359 /* Main.storyboard */,
 				A5B229D11F8441E8009FF359 /* Assets.xcassets */,
 				A5B229D31F8441E8009FF359 /* LaunchScreen.storyboard */,
@@ -156,7 +156,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A5B229CA1F8441E8009FF359 /* ViewController.swift in Sources */,
+				A5B229CA1F8441E8009FF359 /* MenuScreen.swift in Sources */,
 				A5B229D01F8441E8009FF359 /* Chess.xcdatamodeld in Sources */,
 				A5B229C81F8441E8009FF359 /* AppDelegate.swift in Sources */,
 			);
@@ -320,6 +320,7 @@
 				A5B229DB1F8441E8009FF359 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
