@@ -32,7 +32,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
 
         startMoveBackground()
-        let audioPath01 = Bundle.main.path(forResource: "Halo", ofType: "mp3")
+        let audioPath01 = Bundle.main.path(forResource: "Piano1", ofType: "mp3")
         do{
             try menuMusic = AVAudioPlayer(contentsOf: URL(fileURLWithPath: audioPath01!))
         } catch {
