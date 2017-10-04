@@ -42,6 +42,7 @@ class ViewController: UIViewController {
         menuMusic.numberOfLoops = -1
         menuMusic.play()
         
+        pressAnywhereToStart.alpha = 0
         menuBG.alpha = 0
         chessMenuLabel.alpha = 0
         onePlayerButton.alpha = 0
@@ -67,7 +68,7 @@ class ViewController: UIViewController {
     
     
     var moveRight = true
-    var fadeOut = true
+    var fadeOut = false
     
     func moveBackground() {
         
