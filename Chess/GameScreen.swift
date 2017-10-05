@@ -9,6 +9,20 @@
 import UIKit
 
 class GameScreen: UIViewController {
+    
+    
+    @IBOutlet var displayTurn: UILabel!
+    @IBOutlet var displayCheck: UILabel!
+    @IBOutlet var panGesture: UIPanGestureRecognizer!
+    
+    var pieceDragged: UIChessPiece!
+    var sourceOrigin: CGPoint!
+    var destinationOrigin: CGPoint!
+    static var SPACE_FROM_LEFT_EDGE: Int = 35
+    static var SPACR_FROM_TOP_EDGE: Int = 181
+    static var TILE_SIZE: Int = 38
+    var myChessGame: ChessGame!
+    var chessPieces: [UIChessPiece]!
 
     override func viewDidLoad() {
         super.viewDidLoad()

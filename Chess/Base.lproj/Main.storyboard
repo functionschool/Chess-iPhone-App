@@ -439,13 +439,37 @@
                                     <action selector="backButtonPressed:" destination="Igq-ND-D7s" eventType="touchUpInside" id="UU9-d9-doK"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="White's Turn" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l98-a3-492">
+                                <rect key="frame" x="97" y="493" width="181" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="BodoniSvtyTwoITCTT-Bold" family="Bodoni 72" pointSize="27"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pep-fO-ugy">
+                                <rect key="frame" x="97" y="531" width="181" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="BodoniSvtyTwoITCTT-Bold" family="Bodoni 72" pointSize="27"/>
+                                <color key="textColor" red="0.50196081400000003" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.64039792926095596" green="0.75719909283690401" blue="0.88691455125808716" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <gestureRecognizers/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="dox-pd-uX6" appends="YES" id="JUI-Gq-L8P"/>
+                        </connections>
                     </view>
+                    <connections>
+                        <outlet property="displayCheck" destination="pep-fO-ugy" id="Q6q-k1-XUB"/>
+                        <outlet property="displayTurn" destination="l98-a3-492" id="aPB-wO-Iif"/>
+                        <outlet property="panGesture" destination="dox-pd-uX6" id="I7t-ai-SEt"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aIU-Gw-0wN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="dox-pd-uX6"/>
             </objects>
-            <point key="canvasLocation" x="833" y="138"/>
+            <point key="canvasLocation" x="832.79999999999995" y="137.18140929535232"/>
         </scene>
     </scenes>
     <resources>
