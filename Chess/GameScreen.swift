@@ -26,10 +26,49 @@ class GameScreen: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        chessPieces = []
+        myChessGame = ChessGame.init(viewController: self)
     }
     
     override var prefersStatusBarHidden: Bool {
         return true
+    }
+    
+    func drag(piece: UIChessPiece, usingGestureRecognizer gestureRecognizer: UIPanGestureRecognizer) {
+        
+        let translation = gestureRecognizer.translation(in: view)
+        
+        piece.center = CGPoint(x: translation.x + piece.center.x, y: translation.y + piece.center.y)
+        
+        //makes piece stay on finger while dragging
+        gestureRecognizer.setTranslation(CGPoint.zero, in: view)
+        
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        pieceDragged = touches.first!.view as? UIChessPiece
+        
+        //if we toucheda chess piece
+        if pieceDragged != nil {
+            
+            //We save the location just in case the user did an invalid move
+            sourceOrigin = pieceDragged.frame.origin
+        }
+        
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        if pieceDragged != nil {
+            drag(piece: pieceDragged, usingGestureRecognizer: panGesture)
+        }
+        
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
     }
     
     @IBAction func backButtonPressed(_ sender: Any) {

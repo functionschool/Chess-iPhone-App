@@ -10,4 +10,10 @@ import UIKit
 
 class ChessGame: NSObject {
     
+    var theChessBoard: ChessBoard!
+    
+    init(viewController: GameScreen) {
+        theChessBoard = ChessBoard.init(viewController: viewController)
+    }
+    
 }
