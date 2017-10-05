@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class ViewController: UIViewController {
+class MenuScreen: UIViewController {
 
     var timer = Timer()
     var menuMusic = AVAudioPlayer()
@@ -63,7 +63,7 @@ class ViewController: UIViewController {
     
     func startMoveBackground() {
         
-        timer = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(ViewController.moveBackground), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(MenuScreen.moveBackground), userInfo: nil, repeats: true)
     }
     
     
@@ -128,7 +128,7 @@ class ViewController: UIViewController {
     
     func startChangeScreens() {
         
-        timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(ViewController.changeScreens), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(MenuScreen.changeScreens), userInfo: nil, repeats: true)
     }
     
     var changed = false

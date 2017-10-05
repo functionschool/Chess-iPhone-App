@@ -6,4 +6,8 @@
 //  Copyright © 2017 Kousei Richeson. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+class ChessGame: NSObject {
+    
+}
