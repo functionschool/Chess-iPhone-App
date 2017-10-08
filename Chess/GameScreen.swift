@@ -69,6 +69,40 @@ class GameScreen: UIViewController {
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         
+        //Lets make the piece land in the middle of the square
+        //If we dragged a piece,
+        if pieceDragged != nil {
+            
+            let touchLocation = touches.first!.location(in: view)
+            
+            var x = Int(touchLocation.x)
+            var y = Int(touchLocation.y)
+            
+            x = x - GameScreen.SPACE_FROM_LEFT_EDGE
+            y = y - GameScreen.SPACE_FROM_TOP_EDGE
+            
+            x = (x / GameScreen.TILE_SIZE) * GameScreen.TILE_SIZE
+            y = (y / GameScreen.TILE_SIZE) * GameScreen.TILE_SIZE
+            
+            x = x + GameScreen.SPACE_FROM_LEFT_EDGE
+            y = y + GameScreen.SPACE_FROM_TOP_EDGE
+            
+            destinationOrigin = CGPoint(x: x, y: y)
+            
+            let sourceIndex = ChessBoard.indexOf(origin: sourceOrigin)
+            let destIndex = ChessBoard.indexOf(origin: destinationOrigin)
+            
+            if myChessGame.isMoveValid(piece: pieceDragged, fromIndex: sourceIndex, toIndex: destIndex) {
+                pieceDragged.frame.origin = destinationOrigin
+            }
+            else {
+                pieceDragged.frame.origin = sourceOrigin
+            }
+            
+        }
+        
+        
+        
     }
     
     @IBAction func backButtonPressed(_ sender: Any) {
