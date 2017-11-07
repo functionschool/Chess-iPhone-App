@@ -34,7 +34,10 @@ class Rook: UIChessPiece {
     }
     
     func doesMoveSeemFine(fromIndex source: BoardIndex, toIndex dest: BoardIndex) -> Bool {
-        return true
+        if source.row == dest.row || source.col == dest.col{
+            return true
+        }
+        return false
     }
     
     required init(coder aDecoder: NSCoder) {
