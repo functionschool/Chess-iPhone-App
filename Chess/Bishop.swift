@@ -34,6 +34,15 @@ class Bishop: UIChessPiece {
         
     }
     
+    func doesMoveSeemFine(fromIndex source: BoardIndex, toIndex dest: BoardIndex) -> Bool {
+        
+        if abs(dest.row - source.row) == abs(dest.col - source.col) {
+            return true
+        }
+        
+        return false
+    }
+    
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
     }

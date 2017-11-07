@@ -96,14 +96,24 @@ class GameScreen: UIViewController {
                 
                 myChessGame.move(piece: pieceDragged, fromIndex: sourceIndex, toIndex: destIndex, toOrigin: destinationOrigin)
                 
+                myChessGame.nextTurn()
+                
+                updateTurnOnScreen()
+                
             }
             else {
                 pieceDragged.frame.origin = sourceOrigin
             }
             
         }
+
+    }
+    
+    func updateTurnOnScreen() {
         
+        displayTurn.text = myChessGame.isWhiteTurn ? "White's Turn" : "Black's Turn"
         
+        displayTurn.textColor = myChessGame.isWhiteTurn ? UIColor.white : UIColor.black
         
     }
     

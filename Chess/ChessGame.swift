@@ -11,6 +11,7 @@ import UIKit
 class ChessGame: NSObject {
     
     var theChessBoard: ChessBoard!
+    var isWhiteTurn = true
     
     init(viewController: GameScreen) {
         theChessBoard = ChessBoard.init(viewController: viewController)
@@ -41,7 +42,152 @@ class ChessGame: NSObject {
             return false
         }
         
+        guard isTurnColor(sameAsPiece: piece) else {
+            print("WRONG TURN")
+            return false
+        }
+        
+        return isNormalMoveValid(forPiece: piece, fromIndex: sourceIndex, toIndex: destIndex)
+    }
+    
+    func isNormalMoveValid(forPiece piece: UIChessPiece, fromIndex source:BoardIndex, toIndex dest: BoardIndex) -> Bool {
+        
+        guard source != dest else {
+            print("MOVING PIECE ON ITS CURRENT POSTITION")
+            return false
+        }
+        
+        guard !isAttackingAlliedPiece(sourceChessPiece: piece, destIndex: dest) else {
+            print("ATTACKING ALLIED PIECE")
+            return false
+        }
+        
+        switch piece {
+        case is Pawn:
+            return isMoveValid(forPawn: piece as! Pawn, fromIndex: source, toIndex: dest)
+        case is Rook, is Bishop, is Queen:
+            return isMoveValid(forRookOrBishopOrQueen: piece, fromIndex: source, toIndex: dest)
+        case is Knight:
+            if !(piece as! Knight).doesMoveSeemFine(fromIndex: source, toIndex: dest) {
+                return false
+            }
+        case is King:
+            return isMoveValid(forKing: piece as! King, fromIndex: source, toIndex: dest)
+        default:
+            break
+        }
+        
         return true
+        
+    }
+    
+    func isMoveValid(forPawn pawn: Pawn, fromIndex source: BoardIndex, toIndex dest: BoardIndex) -> Bool {
+        
+        if !pawn.doesMoveSeemFine(fromIndex: source, toIndex: dest) {
+            return false
+        }
+        
+        //non-attacking move
+        if source.col == dest.col {
+            
+            //advance by 2
+            if pawn.triesToAdvanceBy2 {
+                var moveForward = 0
+                
+                if pawn.color == UIColor.black {
+                    moveForward = 1
+                }
+                else {
+                    moveForward = -1
+                }
+                
+                if theChessBoard.board[dest.row][dest.col] is Dummy && theChessBoard.board[dest.row - moveForward][dest.col] is Dummy {
+                    return true
+                }
+            }
+                
+            //advance by 1
+            else {
+                if theChessBoard.board[dest.row][dest.col] is Dummy {
+                    return true
+                }
+            }
+        }
+        
+        //attacking move
+        else {
+            if !(theChessBoard.board[dest.row][dest.col] is Dummy) {
+                return true
+            }
+        }
+        
+        return false
+    }
+    
+    func isMoveValid(forRookOrBishopOrQueen piece: UIChessPiece, fromIndex source: BoardIndex, toIndex dest: BoardIndex) -> Bool {
+        
+        switch piece {
+        case is Rook:
+            if !(piece as! Rook).doesMoveSeemFine(fromIndex: source, toIndex: dest) {
+                return false
+            }
+        case is Bishop:
+            if !(piece as! Bishop).doesMoveSeemFine(fromIndex: source, toIndex: dest) {
+                return false
+            }
+        default:
+            if !(piece as! Queen).doesMoveSeemFine(fromIndex: source, toIndex: dest) {
+                return false
+            }
+        }
+        
+        return true
+    }
+    
+    func isMoveValid(forKing king: King, fromIndex source: BoardIndex, toIndex dest: BoardIndex) -> Bool {
+        return true
+    }
+    
+    func isAttackingAlliedPiece(sourceChessPiece: UIChessPiece, destIndex: BoardIndex) -> Bool {
+        
+        let destPiece: Piece = theChessBoard.board[destIndex.row][destIndex.col]
+        
+        guard !(destPiece is Dummy) else {
+            return false
+        }
+        
+        let destChessPiece = destPiece as! UIChessPiece
+        
+        return (sourceChessPiece.color == destChessPiece.color)
+        
+    }
+    
+    func nextTurn() {
+        
+        isWhiteTurn = !isWhiteTurn
+        
+    }
+    
+    func isTurnColor(sameAsPiece piece: UIChessPiece) -> Bool {
+        
+        if piece.color == UIColor.black {
+            
+            if !isWhiteTurn {
+                return true
+            }
+            
+        }
+        
+        else {
+            
+            if isWhiteTurn {
+                return true
+            }
+            
+        }
+        
+        return false
+        
     }
     
     func isMoveOnBoard(forPieceFrom sourceIndex: BoardIndex, thatGoesTo destIndex: BoardIndex) -> Bool {

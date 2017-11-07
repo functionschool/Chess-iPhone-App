@@ -33,6 +33,10 @@ class King: UIChessPiece {
         
     }
     
+    func doesMoveSeemFine(fromIndex source: BoardIndex, toIndex dest: BoardIndex) -> Bool {
+        return true
+    }
+    
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
     }
