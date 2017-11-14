@@ -34,7 +34,15 @@ class King: UIChessPiece {
     }
     
     func doesMoveSeemFine(fromIndex source: BoardIndex, toIndex dest: BoardIndex) -> Bool {
-        return true
+        let differenceInRows = abs(dest.row - source.row)
+        let differenceInCols = abs(dest.col - source.col)
+        
+        if case 0...1 = differenceInRows{
+            if case 0...1 = differenceInCols{
+                return true
+            }
+        }
+        return false
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -42,3 +50,4 @@ class King: UIChessPiece {
     }
     
 }
+
