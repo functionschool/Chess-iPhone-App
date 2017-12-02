@@ -21,7 +21,6 @@
 		A53AC12D1F84A1A30098EE59 /* ChessBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53AC12C1F84A1A30098EE59 /* ChessBoard.swift */; };
 		A53AC12F1F84A1C00098EE59 /* ExtensionUIChessPiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53AC12E1F84A1C00098EE59 /* ExtensionUIChessPiece.swift */; };
 		A53AC1311F84A1E10098EE59 /* BoardIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53AC1301F84A1E10098EE59 /* BoardIndex.swift */; };
-		A53AC1331F84A1F90098EE59 /* StartScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53AC1321F84A1F90098EE59 /* StartScreen.swift */; };
 		A53AC1351F84A6910098EE59 /* Knight.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53AC1341F84A6910098EE59 /* Knight.swift */; };
 		A53AC1371F84A74E0098EE59 /* GameScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53AC1361F84A74E0098EE59 /* GameScreen.swift */; };
 		A53AC1391F8531CF0098EE59 /* ChessTitle.png in Resources */ = {isa = PBXBuildFile; fileRef = A53AC1381F8531CF0098EE59 /* ChessTitle.png */; };
@@ -56,7 +55,6 @@
 		A53AC12C1F84A1A30098EE59 /* ChessBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChessBoard.swift; sourceTree = "<group>"; };
 		A53AC12E1F84A1C00098EE59 /* ExtensionUIChessPiece.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionUIChessPiece.swift; sourceTree = "<group>"; };
 		A53AC1301F84A1E10098EE59 /* BoardIndex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardIndex.swift; sourceTree = "<group>"; };
-		A53AC1321F84A1F90098EE59 /* StartScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartScreen.swift; sourceTree = "<group>"; };
 		A53AC1341F84A6910098EE59 /* Knight.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Knight.swift; sourceTree = "<group>"; };
 		A53AC1361F84A74E0098EE59 /* GameScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScreen.swift; sourceTree = "<group>"; };
 		A53AC1381F8531CF0098EE59 /* ChessTitle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChessTitle.png; sourceTree = "<group>"; };
@@ -133,7 +131,6 @@
 				A53AC12C1F84A1A30098EE59 /* ChessBoard.swift */,
 				A53AC12E1F84A1C00098EE59 /* ExtensionUIChessPiece.swift */,
 				A53AC1301F84A1E10098EE59 /* BoardIndex.swift */,
-				A53AC1321F84A1F90098EE59 /* StartScreen.swift */,
 				A538A7B11FD13B4300DA5FA1 /* GameViewController.swift */,
 				A538A7B31FD1407700DA5FA1 /* TextOverlay.swift */,
 				A5B229CB1F8441E8009FF359 /* Main.storyboard */,
@@ -240,7 +237,6 @@
 				A5B229CA1F8441E8009FF359 /* MenuScreen.swift in Sources */,
 				A5B229D01F8441E8009FF359 /* Chess.xcdatamodeld in Sources */,
 				A538A7B41FD1407700DA5FA1 /* TextOverlay.swift in Sources */,
-				A53AC1331F84A1F90098EE59 /* StartScreen.swift in Sources */,
 				A53AC11B1F84A0D60098EE59 /* Pawn.swift in Sources */,
 				A53AC1351F84A6910098EE59 /* Knight.swift in Sources */,
 				A53AC1311F84A1E10098EE59 /* BoardIndex.swift in Sources */,

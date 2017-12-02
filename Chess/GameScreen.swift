@@ -23,12 +23,14 @@ class GameScreen: UIViewController {
     static var TILE_SIZE: Int = 38
     var myChessGame: ChessGame!
     var chessPieces: [UIChessPiece]!
+    var isAgainstAI: Bool!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         chessPieces = []
         myChessGame = ChessGame.init(viewController: self)
+        print("SINGLEPLAYER: \(isAgainstAI)")
     }
     
     override var prefersStatusBarHidden: Bool {
@@ -96,6 +98,12 @@ class GameScreen: UIViewController {
                 
                 myChessGame.move(piece: pieceDragged, fromIndex: sourceIndex, toIndex: destIndex, toOrigin: destinationOrigin)
                 
+                //check if game's over
+                if myChessGame.isGameOver(){
+                    displayWinner()
+                    return
+                }
+                
                 myChessGame.nextTurn()
                 
                 updateTurnOnScreen()
@@ -107,6 +115,32 @@ class GameScreen: UIViewController {
             
         }
 
+    }
+    
+    func displayWinner(){
+        
+        let box = UIAlertController(title: "Game Over", message: "\(myChessGame.winner!) wins", preferredStyle: UIAlertControllerStyle.alert)
+        
+        box.addAction(UIAlertAction(title: "Back to main menu", style: UIAlertActionStyle.default, handler: { action in self.performSegue(withIdentifier: "backToMainMenu", sender: self) }))
+        
+        box.addAction(UIAlertAction(title: "Rematch", style: UIAlertActionStyle.default, handler: {
+            action in
+            
+            //clear screen and board matrix
+            for chessPiece in self.chessPieces{
+                self.myChessGame.theChessBoard.remove(piece: chessPiece)
+            }
+            
+            //create new game
+            self.myChessGame = ChessGame(viewController: self)
+            
+            //update labels with game status
+            self.updateTurnOnScreen()
+            self.displayCheck.text = nil
+        }))
+        
+        self.present(box, animated: true, completion: nil)
+        
     }
     
     func updateTurnOnScreen() {

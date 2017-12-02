@@ -56,6 +56,24 @@ class MenuScreen: UIViewController {
         
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        let destVC = segue.destination as! GameScreen
+        
+        if segue.identifier == "singleplayer" {
+            destVC.isAgainstAI = true
+        }
+        
+        if segue.identifier == "multiplayer" {
+            destVC.isAgainstAI = false
+        }
+        
+    }
+    
+    @IBAction func unwind(segue: UIStoryboardSegue){
+        
+    }
+    
 
     override var prefersStatusBarHidden: Bool {
         return true

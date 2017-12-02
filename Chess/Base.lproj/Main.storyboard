@@ -58,7 +58,7 @@
                                     <color key="titleColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="Igq-ND-D7s" kind="show" id="esA-JL-jxM"/>
+                                    <segue destination="Igq-ND-D7s" kind="show" identifier="singleplayer" id="esA-JL-jxM"/>
                                 </connections>
                             </button>
                             <button opaque="NO" alpha="0.94999999999999996" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ict-5t-l1x">
@@ -68,7 +68,7 @@
                                     <color key="titleColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="pBN-Jw-gOv" kind="show" id="jT1-zB-PrV"/>
+                                    <segue destination="Igq-ND-D7s" kind="show" identifier="multiplayer" id="N3W-VP-YrY"/>
                                 </connections>
                             </button>
                             <button opaque="NO" alpha="0.94999998807907104" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I21-AR-xIS">
@@ -77,6 +77,9 @@
                                 <state key="normal" title="Settings" image="SettingsButton.png">
                                     <color key="titleColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <segue destination="pBN-Jw-gOv" kind="show" id="8Wr-hl-tho"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -464,9 +467,11 @@
                         <outlet property="displayCheck" destination="pep-fO-ugy" id="Q6q-k1-XUB"/>
                         <outlet property="displayTurn" destination="l98-a3-492" id="aPB-wO-Iif"/>
                         <outlet property="panGesture" destination="dox-pd-uX6" id="I7t-ai-SEt"/>
+                        <segue destination="BgG-LC-heA" kind="unwind" identifier="backToMainMenu" unwindAction="unwindWithSegue:" id="3UY-Pg-Drk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aIU-Gw-0wN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="BgG-LC-heA" userLabel="Exit" sceneMemberID="exit"/>
                 <panGestureRecognizer minimumNumberOfTouches="1" id="dox-pd-uX6"/>
             </objects>
             <point key="canvasLocation" x="1646" y="138"/>
@@ -483,7 +488,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PNC-OA-chY" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="894" y="119"/>
+            <point key="canvasLocation" x="134" y="931"/>
         </scene>
     </scenes>
     <resources>
@@ -494,4 +499,7 @@
         <image name="SettingsButton.png" width="885" height="226"/>
         <image name="TwoPlayersButton.png" width="885" height="226"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="esA-JL-jxM"/>
+    </inferredMetricsTieBreakers>
 </document>
