@@ -23,8 +23,7 @@ class GameScreen: UIViewController {
     static var TILE_SIZE: Int = 38
     var myChessGame: ChessGame!
     var chessPieces: [UIChessPiece]!
-    var isAgainstAI: Bool!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -97,20 +96,9 @@ class GameScreen: UIViewController {
                 
                 myChessGame.move(piece: pieceDragged, fromIndex: sourceIndex, toIndex: destIndex, toOrigin: destinationOrigin)
                 
-                //check if games over
-                if myChessGame.isGameOver(){
-                    displayWinner()
-                    return
-                }
+                myChessGame.nextTurn()
                 
-                if shouldPromotePawn(){
-                    promptForPawnPromotion()
-                }
-                else{
-                    resumeGame()
-                }
-                
-                
+                updateTurnOnScreen()
                 
             }
             else {
@@ -118,125 +106,8 @@ class GameScreen: UIViewController {
             }
             
         }
-        
+
     }
-    
-    func resumeGame(){
-        //display checksm if any
-        displayCheckk()
-        
-        myChessGame.nextTurn()
-        
-        updateTurnOnScreen()
-        
-        //make AI move, if necessart
-        if isAgainstAI == true && !myChessGame.isWhiteTurn{
-            myChessGame.makeAIMove()
-            
-            if myChessGame.isGameOver(){
-                displayWinner()
-                return
-            }
-            if shouldPromotePawn(){
-                promote(pawn: myChessGame.getPawnToBePromoted()!, into: "Queen")
-            }
-            displayCheckk()
-            
-            myChessGame.nextTurn()
-            updateTurnOnScreen()
-        }
-    }
-    
-    func promote(pawn pawnToBePromoted: Pawn, into pieceName: String){
-        let pawnColor = pawnToBePromoted.color
-        let pawnFrame = pawnToBePromoted.frame
-        let pawnIndex = ChessBoard.indexOf(origin: pawnToBePromoted.frame.origin)
-        
-        myChessGame.theChessBoard.remove(piece: pawnToBePromoted)
-        
-        switch pieceName{
-        case "Queen":
-            myChessGame.theChessBoard.board[pawnIndex.row][pawnIndex.col] = Queen(frame: pawnFrame, color: pawnColor, vc: self)
-        case "Knight":
-            myChessGame.theChessBoard.board[pawnIndex.row][pawnIndex.col] = Knight(frame: pawnFrame, color: pawnColor, vc: self)
-        case "Rook":
-            myChessGame.theChessBoard.board[pawnIndex.row][pawnIndex.col] = Rook(frame: pawnFrame, color: pawnColor, vc: self)
-        case "Bishop":
-            myChessGame.theChessBoard.board[pawnIndex.row][pawnIndex.col] = Bishop(frame: pawnFrame, color: pawnColor, vc: self)
-        default:
-            break
-        }
-    }
-    
-    func promptForPawnPromotion(){
-        if let pawnToPromote = myChessGame.getPawnToBePromoted(){
-            let box = UIAlertController(title: "Pawn Promotion", message: "Choose piece", preferredStyle: UIAlertControllerStyle.alert)
-            
-            box.addAction(UIAlertAction(title: "Queen", style: UIAlertActionStyle.default, handler: { action in
-                self.promote(pawn: pawnToPromote, into: action.title!)
-                self.resumeGame()
-            } ))
-            
-            box.addAction(UIAlertAction(title: "Knight", style: UIAlertActionStyle.default, handler: { action in
-                self.promote(pawn: pawnToPromote, into: action.title!)
-                self.resumeGame()
-            } ))
-            
-            box.addAction(UIAlertAction(title: "Rook", style: UIAlertActionStyle.default, handler: { action in
-                self.promote(pawn: pawnToPromote, into: action.title!)
-                self.resumeGame()
-            } ))
-            
-            box.addAction(UIAlertAction(title: "Bishop", style: UIAlertActionStyle.default, handler: { action in
-                self.promote(pawn: pawnToPromote, into: action.title!)
-                self.resumeGame()
-            } ))
-            self.present(box, animated: true, completion: nil)
-        }
-    }
-    
-    func shouldPromotePawn() -> Bool{
-        return (myChessGame.getPawnToBePromoted() != nil)
-    }
-    
-    func displayCheckk(){
-        let playerChecked = myChessGame.getPlayerChecked()
-        
-        
-        if playerChecked != nil{
-            displayCheck.text = playerChecked! + " is in check!"
-        }
-        else{
-            displayCheck.text = nil
-        }
-    }
-    
-    
-    func displayWinner(){
-        let box = UIAlertController(title: "Game Over", message: "\(myChessGame.winner!) wins", preferredStyle: UIAlertControllerStyle.alert)
-        
-        box.addAction(UIAlertAction(title: "Back to main menu", style: UIAlertActionStyle.default, handler: {
-            action in self.performSegue(withIdentifier: "backtoMainMenu", sender: self)
-        }))
-        box.addAction(UIAlertAction(title: "Rematch", style : UIAlertActionStyle.default, handler:{
-            action in
-            
-            //clear screen, pieces and board
-            for chessPiece in self.chessPieces{
-                self.myChessGame.theChessBoard.remove(piece: chessPiece)
-            }
-            
-            //create new game
-            self.myChessGame = ChessGame(viewController: self)
-            
-            //update labels
-            self.updateTurnOnScreen()
-            self.displayCheck.text = nil
-        }))
-        self.present(box, animated: true, completion: nil)
-    }
-    
-    
     
     func updateTurnOnScreen() {
         
@@ -254,6 +125,5 @@ class GameScreen: UIViewController {
     
     
     
-    
-}
 
+}

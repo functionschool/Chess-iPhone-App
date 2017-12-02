@@ -34,13 +34,7 @@ class Queen: UIChessPiece {
     }
     
     func doesMoveSeemFine(fromIndex source: BoardIndex, toIndex dest: BoardIndex) -> Bool {
-        if source.row == dest.row || source.col == dest.col{
-            return true
-        }
-        if abs(dest.row - source.row) == abs(dest.col - source.col){
-           return true
-        }
-        return false
+        return true
     }
     
     required init(coder aDecoder: NSCoder) {
