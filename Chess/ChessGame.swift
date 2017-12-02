@@ -128,11 +128,72 @@ class ChessGame: NSObject {
         }
     }
     
+    func getScoreForLocation(ofPiece aChessPiece: UIChessPiece) -> Int {
+        var locationScore = 0
+        
+        guard let source = theChessBoard.getIndex(forChessPiece: aChessPiece) else {
+            return 0
+        }
+        
+        for row in 0..<theChessBoard.ROWS{
+            for col in 0..<theChessBoard.COLS{
+                if theChessBoard.board[row][col] is UIChessPiece{
+                    let dest = BoardIndex(row: row, col: col)
+                    if isNormalMoveValid(forPiece: aChessPiece, fromIndex: source, toIndex: dest, canAttackAllies: true){
+                        locationScore += 1
+                    }
+                }
+            }
+        }
+        
+        return locationScore
+        
+    }
+    
     func didBestMoveForAI(forScoreOver limit: Int) -> Bool{
         return false
     }
     
     func didAttackUndefendedPiece() -> Bool {
+        
+        loopThatTraversesChessPieces: for attackingChessPiece in theChessBoard.vc.chessPieces {
+            
+            guard attackingChessPiece.color == UIColor.black else {
+                continue loopThatTraversesChessPieces
+            }
+            
+            guard let source = theChessBoard.getIndex(forChessPiece: attackingChessPiece) else {
+                continue loopThatTraversesChessPieces
+            }
+            
+            let possibleDestinations = getArrayOfPossibleMoves(forPiece: attackingChessPiece)
+            
+            searchForUndefendedWhitePieces: for attackedIndex in possibleDestinations{
+                guard let attackedChessPiece = theChessBoard.board[attackedIndex.row][attackedIndex.col] as? UIChessPiece else {
+                    continue searchForUndefendedWhitePieces
+                }
+                
+                for row in 0..<theChessBoard.ROWS {
+                    for col in 0..<theChessBoard.COLS{
+                        guard let defendingChessPiece = theChessBoard.board[row][col] as? UIChessPiece, defendingChessPiece.color == UIColor.white else {
+                            continue
+                        }
+                        
+                        let defendingIndex = BoardIndex(row: row, col: col)
+                        
+                        if isNormalMoveValid(forPiece: defendingChessPiece, fromIndex: defendingIndex, toIndex: attackedIndex, canAttackAllies: true){
+                            continue searchForUndefendedWhitePieces
+                        }
+                    }
+                }
+                
+                move(piece: attackingChessPiece, fromIndex: source, toIndex: attackedIndex, toOrigin: attackedChessPiece.frame.origin)
+                return true
+                
+            }
+            
+        }
+        
         return false
     }
     
@@ -237,16 +298,18 @@ class ChessGame: NSObject {
         return isNormalMoveValid(forPiece: piece, fromIndex: sourceIndex, toIndex: destIndex)
     }
     
-    func isNormalMoveValid(forPiece piece: UIChessPiece, fromIndex source:BoardIndex, toIndex dest: BoardIndex) -> Bool {
+    func isNormalMoveValid(forPiece piece: UIChessPiece, fromIndex source:BoardIndex, toIndex dest: BoardIndex, canAttackAllies: Bool = false) -> Bool {
         
         guard source != dest else {
             print("MOVING PIECE ON ITS CURRENT POSTITION")
             return false
         }
         
-        guard !isAttackingAlliedPiece(sourceChessPiece: piece, destIndex: dest) else {
-            print("ATTACKING ALLIED PIECE")
-            return false
+        if !canAttackAllies{
+            guard !isAttackingAlliedPiece(sourceChessPiece: piece, destIndex: dest) else {
+                print("ATTACKING ALLIED PIECE")
+                return false
+            }
         }
         
         switch piece {

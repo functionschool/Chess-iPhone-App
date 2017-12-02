@@ -58,14 +58,15 @@ class MenuScreen: UIViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        let destVC = segue.destination as! GameScreen
-        
-        if segue.identifier == "singleplayer" {
-            destVC.isAgainstAI = true
-        }
-        
-        if segue.identifier == "multiplayer" {
-            destVC.isAgainstAI = false
+        if segue.identifier == "singleplayer" || segue.identifier == "multiplayer" {
+            let destVC1 = segue.destination as! GameScreen
+            if segue.identifier == "singleplayer" {
+                destVC1.isAgainstAI = true
+            }
+            
+            if segue.identifier == "multiplayer" {
+                destVC1.isAgainstAI = false
+            }
         }
         
     }

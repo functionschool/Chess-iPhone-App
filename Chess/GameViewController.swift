@@ -15,6 +15,7 @@ class GameViewController: UIViewController {
     var textOverlay: TextOverlay!
    // var gameView:SCNView!
     var mainScene:SCNScene!
+    var isAgainstAI: Bool!
     //var cameraNode:SCNNode!
    // var targetCreationTime:TimeInterval = 0
     
@@ -57,7 +58,8 @@ class GameViewController: UIViewController {
         lightNode.light!.castsShadow = true
         lightNode.light!.color = UIColor(white: 0.8, alpha: 1.8	)
         lightNode.position = SCNVector3Make(150, 400, 60)
-        lightNode.rotation = SCNVector4Make(1, 0, 0, Float(-M_PI/2.8))
+        //lightNode.rotation = SCNVector4Make(1, 0, 0, Float(-M_PI/2.8))
+        lightNode.rotation = SCNVector4Make(1, 0, 0, Float(-Double.pi/2.8))
         lightNode.light!.spotInnerAngle = 0
         lightNode.light!.spotOuterAngle = 50
         lightNode.light!.shadowColor = UIColor.black
