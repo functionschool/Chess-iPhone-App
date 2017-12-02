@@ -18,6 +18,171 @@ class ChessGame: NSObject {
         theChessBoard = ChessBoard.init(viewController: viewController)
     }
     
+    func getArrayOfPossibleMoves(forPiece piece: UIChessPiece) -> [BoardIndex]{
+        
+        var arrayOfMoves: [BoardIndex] = []
+        let source = theChessBoard.getIndex(forChessPiece: piece)!
+        
+        for row in 0..<theChessBoard.ROWS{
+            for col in 0..<theChessBoard.COLS{
+                
+                let dest = BoardIndex(row: row, col: col)
+                
+                if isNormalMoveValid(forPiece: piece, fromIndex: source, toIndex: dest){
+                    arrayOfMoves.append(dest)
+                }
+            }
+        }
+        
+        return arrayOfMoves
+    }
+    
+    func makeAIMove(){
+        
+        //get the white king as possible
+        //We assume the AI is always black
+        if getPlayerChecked() == "White" {
+            for aChessPiece in theChessBoard.vc.chessPieces{
+                if aChessPiece.color == UIColor.black {
+                    
+                    guard let source = theChessBoard.getIndex(forChessPiece: aChessPiece) else {
+                        continue
+                    }
+                    
+                    guard let dest = theChessBoard.getIndex(forChessPiece: theChessBoard.whiteKing) else {
+                        continue
+                    }
+                    
+                    if isNormalMoveValid(forPiece: aChessPiece, fromIndex: source, toIndex: dest) {
+                        move(piece: aChessPiece, fromIndex: source, toIndex: dest, toOrigin: theChessBoard.whiteKing.frame.origin)
+                        return
+                    }
+                    
+                }
+            }
+        }
+        
+        //attack undefended white piece, if there is no check on the black king
+        if getPlayerChecked() == nil {
+            if didAttackUndefendedPiece(){
+                return
+            }
+        }
+        
+        var moveFound = false
+        var numberOfTriesToEscapeCheck = 0
+        
+        searchForMoves: while moveFound == false {
+            
+            //get random piece
+            let randChessPieceArrayIndex = Int(arc4random_uniform(UInt32(theChessBoard.vc.chessPieces.count)))
+            let chessPieceToMove = theChessBoard.vc.chessPieces[randChessPieceArrayIndex]
+            
+            guard chessPieceToMove.color == UIColor.black else{
+                continue
+            }
+            
+            //get a random move
+            let movesArray = getArrayOfPossibleMoves(forPiece: chessPieceToMove)
+            guard movesArray.isEmpty == false else {
+                continue searchForMoves
+            }
+            
+            let randMovesArrayIndex = Int(arc4random_uniform(UInt32(movesArray.count)))
+            let randDestIndex = movesArray[randMovesArrayIndex]
+            let destOrigin = ChessBoard.getFrame(forRow: randDestIndex.row, forCol: randDestIndex.col).origin
+            
+            guard let sourceIndex = theChessBoard.getIndex(forChessPiece: chessPieceToMove) else {
+                continue searchForMoves
+            }
+            
+            //simulate the move on board matrix
+            let pieceTaken = theChessBoard.board[randDestIndex.row][randDestIndex.col]
+            theChessBoard.board[randDestIndex.row][randDestIndex.col] = theChessBoard.board[sourceIndex.row][sourceIndex.col]
+            theChessBoard.board[sourceIndex.row][sourceIndex.col] = Dummy()
+            
+            if numberOfTriesToEscapeCheck < 1000{
+                guard getPlayerChecked() != "Black" else {
+                    //undo move
+                    theChessBoard.board[sourceIndex.row][sourceIndex.col] = theChessBoard.board[randDestIndex.row][randDestIndex.col]
+                    theChessBoard.board[randDestIndex.row][randDestIndex.col] = pieceTaken
+                    
+                    numberOfTriesToEscapeCheck += 1
+                    continue searchForMoves
+                }
+            }
+            
+            //undo move
+            theChessBoard.board[sourceIndex.row][sourceIndex.col] = theChessBoard.board[randDestIndex.row][randDestIndex.col]
+            theChessBoard.board[randDestIndex.row][randDestIndex.col] = pieceTaken
+
+            //try best move, if any good one
+            if didBestMoveForAI(forScoreOver: 2){
+                return
+            }
+            
+            move(piece: chessPieceToMove, fromIndex: sourceIndex, toIndex: randDestIndex, toOrigin: destOrigin)
+            
+            moveFound = true
+            
+        }
+    }
+    
+    func didBestMoveForAI(forScoreOver limit: Int) -> Bool{
+        return false
+    }
+    
+    func didAttackUndefendedPiece() -> Bool {
+        return false
+    }
+    
+    func getPawnToBePromoted() -> Pawn?{
+        for chessPiece in theChessBoard.vc.chessPieces{
+            if let pawn = chessPiece as? Pawn{
+                let pawnIndex = ChessBoard.indexOf(origin: pawn.frame.origin)
+                if pawnIndex.row == 0 || pawnIndex.row == 7{
+                    return pawn
+                }
+            }
+        }
+        return nil
+    }
+    
+    func getPlayerChecked() -> String? {
+        
+        guard let whiteKingIndex = theChessBoard.getIndex(forChessPiece: theChessBoard.whiteKing)
+        else {
+            return nil
+        }
+        
+        guard let blackKingIndex = theChessBoard.getIndex(forChessPiece: theChessBoard.blackKing)
+            else {
+                return nil
+        }
+        
+        for row in 0..<theChessBoard.ROWS{
+            for col in 0..<theChessBoard.COLS{
+                if let chessPiece = theChessBoard.board[row][col] as? UIChessPiece{
+                    let chessPieceIndex = BoardIndex(row: row, col: col)
+                    
+                    if chessPiece.color == UIColor.black {
+                        if isNormalMoveValid(forPiece: chessPiece, fromIndex: chessPieceIndex, toIndex: whiteKingIndex){
+                            return "White"
+                        }
+                    }
+                    else {
+                        if isNormalMoveValid(forPiece: chessPiece, fromIndex: chessPieceIndex, toIndex: blackKingIndex) {
+                            return "Black"
+                        }
+                    }
+                }
+            }
+        }
+        
+        return nil
+        
+    }
+    
     func isGameOver() -> Bool {
         if didSomebodyWin() {
             return true

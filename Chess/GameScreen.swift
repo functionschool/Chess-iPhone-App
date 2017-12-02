@@ -104,9 +104,12 @@ class GameScreen: UIViewController {
                     return
                 }
                 
-                myChessGame.nextTurn()
-                
-                updateTurnOnScreen()
+                if shouldPromotePawn(){
+                    promptForPawnPromotion()
+                }
+                else{
+                    resumeGame()
+                }
                 
             }
             else {
@@ -115,6 +118,105 @@ class GameScreen: UIViewController {
             
         }
 
+    }
+    
+    func resumeGame(){
+        //display checks if any
+        displayCheckFunction()
+        
+        //Change the turn
+        myChessGame.nextTurn()
+        
+        //display turn on screen
+        updateTurnOnScreen()
+        
+        //make AI move, if necessary
+        if isAgainstAI == true && !myChessGame.isWhiteTurn{
+            myChessGame.makeAIMove()
+            
+            if myChessGame.isGameOver() {
+                displayWinner()
+                return
+            }
+            
+            if shouldPromotePawn(){
+                promote(pawn: myChessGame.getPawnToBePromoted()!, into: "Queen")
+            }
+            
+            displayCheckFunction()
+            
+            myChessGame.nextTurn()
+            
+            updateTurnOnScreen()
+        }
+    }
+    
+    func promote(pawn pawnToBePromoted: Pawn, into pieceName: String){
+        
+        let pawnColor = pawnToBePromoted.color
+        let pawnFrame = pawnToBePromoted.frame
+        let pawnIndex = ChessBoard.indexOf(origin: pawnToBePromoted.frame.origin)
+        
+        myChessGame.theChessBoard.remove(piece: pawnToBePromoted)
+        
+        switch pieceName {
+            case "Queen":
+            myChessGame.theChessBoard.board[pawnIndex.row][pawnIndex.col] = Queen(frame: pawnFrame, color: pawnColor, vc: self)
+            case "Knight":
+                myChessGame.theChessBoard.board[pawnIndex.row][pawnIndex.col] = Knight(frame: pawnFrame, color: pawnColor, vc: self)
+            case "Rook":
+                myChessGame.theChessBoard.board[pawnIndex.row][pawnIndex.col] = Rook(frame: pawnFrame, color: pawnColor, vc: self)
+            case "Bishop":
+                myChessGame.theChessBoard.board[pawnIndex.row][pawnIndex.col] = Bishop(frame: pawnFrame, color: pawnColor, vc: self)
+            default:
+                break
+        }
+        
+    }
+    
+    func promptForPawnPromotion(){
+        if let pawnToPromote = myChessGame.getPawnToBePromoted(){
+            
+            let box = UIAlertController(title: "Pawn promotion", message: "Choose Piece", preferredStyle: UIAlertControllerStyle.alert)
+            
+            box.addAction(UIAlertAction(title: "Queen", style: UIAlertActionStyle.default, handler: { action in
+                self.promote(pawn: pawnToPromote, into: action.title!)
+                self.resumeGame()
+            }))
+            
+            box.addAction(UIAlertAction(title: "Knight", style: UIAlertActionStyle.default, handler: { action in
+                self.promote(pawn: pawnToPromote, into: action.title!)
+                self.resumeGame()
+            }))
+            
+            box.addAction(UIAlertAction(title: "Rook", style: UIAlertActionStyle.default, handler: { action in
+                self.promote(pawn: pawnToPromote, into: action.title!)
+                self.resumeGame()
+            }))
+            
+            box.addAction(UIAlertAction(title: "Bishop", style: UIAlertActionStyle.default, handler: { action in
+                self.promote(pawn: pawnToPromote, into: action.title!)
+                self.resumeGame()
+            }))
+            
+            self.present(box, animated: true, completion: nil)
+            
+        }
+    }
+    
+    func shouldPromotePawn() -> Bool {
+        return (myChessGame.getPawnToBePromoted() != nil)
+    }
+    
+    func displayCheckFunction(){
+        let playerChecked = myChessGame.getPlayerChecked()
+        
+        if playerChecked != nil {
+            displayCheck.text = playerChecked! + " is in check!"
+        }
+        else {
+            displayCheck.text = nil
+        }
     }
     
     func displayWinner(){
