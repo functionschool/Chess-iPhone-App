@@ -25,12 +25,13 @@ class GameViewController: UIViewController {
         let sceneView = self.view as! SCNView
         sceneView.scene = mainScene
         
-        sceneView.showsStatistics = true
+        sceneView.showsStatistics = false
         sceneView.allowsCameraControl = true
         mainScene!.rootNode.addChildNode(createFloorNode())
         sceneView.overlaySKScene = TextOverlay(size: view.frame.size)
         textOverlay = sceneView.overlaySKScene as! TextOverlay
     }
+        
     func createMainScene() -> SCNScene {
         let mainScene = SCNScene(named: "art.scnassets/chesstable.dae")
 //        
@@ -67,28 +68,9 @@ class GameViewController: UIViewController {
         lightNode.light!.zNear = 50
         scene.rootNode.addChildNode(lightNode)
     }
-    
-    
-    
+
     override var prefersStatusBarHidden: Bool {
         return true
-    }
-    
-
-    
-    
-    func updateTurnOnScreen() {
-        
-        //displayTurn.text = myChessGame.isWhiteTurn ? "White's Turn" : "Black's Turn"
-        
-        //displayTurn.textColor = myChessGame.isWhiteTurn ? UIColor.white : UIColor.black
-        
-    }
-    
-    @IBAction func backButtonPressed(_ sender: Any) {
-        
-        self.dismiss(animated: true, completion: nil)
-        
     }
     
     
