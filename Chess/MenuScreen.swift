@@ -24,8 +24,7 @@ class MenuScreen: UIViewController {
     @IBOutlet var chessMenuTitle: UIImageView!
     @IBOutlet var onePlayerButton: UIButton!
     @IBOutlet var twoPlayersButton: UIButton!
-    @IBOutlet var settingsButton: UIButton!
-    
+    @IBOutlet var threeDModel: UIButton!
     
     
     override func viewDidLoad() {
@@ -48,11 +47,11 @@ class MenuScreen: UIViewController {
         chessMenuTitle.alpha = 0
         onePlayerButton.alpha = 0
         twoPlayersButton.alpha = 0
-        settingsButton.alpha = 0
+        threeDModel.alpha = 0
         
         onePlayerButton.isHidden = true
         twoPlayersButton.isHidden = true
-        settingsButton.isHidden = true
+        threeDModel.isHidden = true
         
     }
 
@@ -139,7 +138,7 @@ class MenuScreen: UIViewController {
         pressedAnywhereButton.isHidden = true
         onePlayerButton.isHidden = false
         twoPlayersButton.isHidden = false
-        settingsButton.isHidden = false
+        threeDModel.isHidden = false
 
         
     }
@@ -169,7 +168,7 @@ class MenuScreen: UIViewController {
             chessMenuTitle.alpha = menuAlpha + 0.01
             onePlayerButton.alpha = menuAlpha + 0.01
             twoPlayersButton.alpha = menuAlpha + 0.01
-            settingsButton.alpha = menuAlpha + 0.01
+            threeDModel.alpha = menuAlpha + 0.01
         }
         
         if(previewBG.alpha < -0.20){

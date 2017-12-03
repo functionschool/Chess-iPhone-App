@@ -76,14 +76,14 @@
                                     <segue destination="Igq-ND-D7s" kind="show" identifier="multiplayer" id="N3W-VP-YrY"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" alpha="0.94999998807907104" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I21-AR-xIS">
+                            <button opaque="NO" alpha="0.94999999999999996" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I21-AR-xIS">
                                 <rect key="frame" x="191" y="382" width="168" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Settings" image="SettingsButton.png">
+                                <state key="normal" title="3DModel" image="3DModel.png">
                                     <color key="titleColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="pBN-Jw-gOv" kind="show" identifier="settings" id="8Wr-hl-tho"/>
+                                    <segue destination="pBN-Jw-gOv" kind="show" identifier="3DModel" id="8Wr-hl-tho"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -97,7 +97,7 @@
                         <outlet property="pressAnywhereToStart" destination="Lh8-NF-DLf" id="xY4-o0-yJL"/>
                         <outlet property="pressedAnywhereButton" destination="gIz-3v-7DX" id="TxD-de-VIU"/>
                         <outlet property="previewBG" destination="y8q-fe-aBw" id="yZb-6M-bMI"/>
-                        <outlet property="settingsButton" destination="I21-AR-xIS" id="FVO-tX-ees"/>
+                        <outlet property="threeDModel" destination="I21-AR-xIS" id="LnH-Ug-ZD6"/>
                         <outlet property="twoPlayersButton" destination="ict-5t-l1x" id="MSF-G5-4Ab"/>
                     </connections>
                 </viewController>
@@ -497,11 +497,11 @@
         </scene>
     </scenes>
     <resources>
+        <image name="3DModel.png" width="885" height="226"/>
         <image name="Background1.png" width="1920" height="1080"/>
         <image name="Background3.png" width="604" height="1075"/>
         <image name="ChessTitle.png" width="787" height="188"/>
         <image name="OnePlayerButton.png" width="885" height="226"/>
-        <image name="SettingsButton.png" width="885" height="226"/>
         <image name="TwoPlayersButton.png" width="885" height="226"/>
     </resources>
     <inferredMetricsTieBreakers>

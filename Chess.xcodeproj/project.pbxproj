@@ -28,6 +28,7 @@
 		A53AC13F1F8551640098EE59 /* OnePlayerButton.png in Resources */ = {isa = PBXBuildFile; fileRef = A53AC13E1F8551640098EE59 /* OnePlayerButton.png */; };
 		A53AC1411F8552210098EE59 /* TwoPlayersButton.png in Resources */ = {isa = PBXBuildFile; fileRef = A53AC1401F8552210098EE59 /* TwoPlayersButton.png */; };
 		A53AC1431F8552240098EE59 /* SettingsButton.png in Resources */ = {isa = PBXBuildFile; fileRef = A53AC1421F8552240098EE59 /* SettingsButton.png */; };
+		A59A0AE81FD388F100798142 /* 3DModel.png in Resources */ = {isa = PBXBuildFile; fileRef = A59A0AE71FD388F100798142 /* 3DModel.png */; };
 		A5B229C81F8441E8009FF359 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B229C71F8441E8009FF359 /* AppDelegate.swift */; };
 		A5B229CA1F8441E8009FF359 /* MenuScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B229C91F8441E8009FF359 /* MenuScreen.swift */; };
 		A5B229CD1F8441E8009FF359 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5B229CB1F8441E8009FF359 /* Main.storyboard */; };
@@ -62,6 +63,7 @@
 		A53AC13E1F8551640098EE59 /* OnePlayerButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OnePlayerButton.png; sourceTree = "<group>"; };
 		A53AC1401F8552210098EE59 /* TwoPlayersButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TwoPlayersButton.png; sourceTree = "<group>"; };
 		A53AC1421F8552240098EE59 /* SettingsButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SettingsButton.png; sourceTree = "<group>"; };
+		A59A0AE71FD388F100798142 /* 3DModel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3DModel.png; sourceTree = "<group>"; };
 		A5B229C41F8441E8009FF359 /* Chess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chess.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5B229C71F8441E8009FF359 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A5B229C91F8441E8009FF359 /* MenuScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuScreen.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 				A53AC13E1F8551640098EE59 /* OnePlayerButton.png */,
 				A53AC1401F8552210098EE59 /* TwoPlayersButton.png */,
 				A53AC1421F8552240098EE59 /* SettingsButton.png */,
+				A59A0AE71FD388F100798142 /* 3DModel.png */,
 			);
 			sourceTree = "<group>";
 		};
@@ -214,6 +217,7 @@
 				A5B229CD1F8441E8009FF359 /* Main.storyboard in Resources */,
 				A5B229E31F84424C009FF359 /* Background3.png in Resources */,
 				A5B229E11F844244009FF359 /* Background2.png in Resources */,
+				A59A0AE81FD388F100798142 /* 3DModel.png in Resources */,
 				A5B229DF1F844241009FF359 /* Background1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

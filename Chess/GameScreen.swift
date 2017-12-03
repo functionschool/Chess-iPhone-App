@@ -133,6 +133,7 @@ class GameScreen: UIViewController {
         //make AI move, if necessary
         if isAgainstAI == true && !myChessGame.isWhiteTurn{
             myChessGame.makeAIMove()
+            print("AI: -----------------")
             
             if myChessGame.isGameOver() {
                 displayWinner()
