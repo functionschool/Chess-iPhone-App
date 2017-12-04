@@ -24,12 +24,9 @@
 		A53AC1351F84A6910098EE59 /* Knight.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53AC1341F84A6910098EE59 /* Knight.swift */; };
 		A53AC1371F84A74E0098EE59 /* GameScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53AC1361F84A74E0098EE59 /* GameScreen.swift */; };
 		A53AC1391F8531CF0098EE59 /* ChessTitle.png in Resources */ = {isa = PBXBuildFile; fileRef = A53AC1381F8531CF0098EE59 /* ChessTitle.png */; };
-		A53AC13B1F854C400098EE59 /* Piano1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A53AC13A1F854C400098EE59 /* Piano1.mp3 */; };
 		A53AC13F1F8551640098EE59 /* OnePlayerButton.png in Resources */ = {isa = PBXBuildFile; fileRef = A53AC13E1F8551640098EE59 /* OnePlayerButton.png */; };
 		A53AC1411F8552210098EE59 /* TwoPlayersButton.png in Resources */ = {isa = PBXBuildFile; fileRef = A53AC1401F8552210098EE59 /* TwoPlayersButton.png */; };
-		A53AC1431F8552240098EE59 /* SettingsButton.png in Resources */ = {isa = PBXBuildFile; fileRef = A53AC1421F8552240098EE59 /* SettingsButton.png */; };
 		A59A0AE81FD388F100798142 /* 3DModel.png in Resources */ = {isa = PBXBuildFile; fileRef = A59A0AE71FD388F100798142 /* 3DModel.png */; };
-		A59A0AF01FD39AD400798142 /* ChessBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = A59A0AEF1FD39AD300798142 /* ChessBackground.png */; };
 		A59A0AF61FD39CDD00798142 /* BG.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A59A0AF51FD39CDC00798142 /* BG.jpg */; };
 		A59A0AF81FD39DB800798142 /* ChessBoard.png in Resources */ = {isa = PBXBuildFile; fileRef = A59A0AF71FD39DB700798142 /* ChessBoard.png */; };
 		A59A0AFC1FD39EB600798142 /* HomeButton.png in Resources */ = {isa = PBXBuildFile; fileRef = A59A0AFB1FD39EB500798142 /* HomeButton.png */; };
@@ -63,12 +60,9 @@
 		A53AC1341F84A6910098EE59 /* Knight.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Knight.swift; sourceTree = "<group>"; };
 		A53AC1361F84A74E0098EE59 /* GameScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScreen.swift; sourceTree = "<group>"; };
 		A53AC1381F8531CF0098EE59 /* ChessTitle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChessTitle.png; sourceTree = "<group>"; };
-		A53AC13A1F854C400098EE59 /* Piano1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Piano1.mp3; sourceTree = "<group>"; };
 		A53AC13E1F8551640098EE59 /* OnePlayerButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OnePlayerButton.png; sourceTree = "<group>"; };
 		A53AC1401F8552210098EE59 /* TwoPlayersButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TwoPlayersButton.png; sourceTree = "<group>"; };
-		A53AC1421F8552240098EE59 /* SettingsButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SettingsButton.png; sourceTree = "<group>"; };
 		A59A0AE71FD388F100798142 /* 3DModel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3DModel.png; sourceTree = "<group>"; };
-		A59A0AEF1FD39AD300798142 /* ChessBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChessBackground.png; sourceTree = "<group>"; };
 		A59A0AF51FD39CDC00798142 /* BG.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = BG.jpg; sourceTree = "<group>"; };
 		A59A0AF71FD39DB700798142 /* ChessBoard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChessBoard.png; sourceTree = "<group>"; };
 		A59A0AFB1FD39EB500798142 /* HomeButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HomeButton.png; sourceTree = "<group>"; };
@@ -107,12 +101,9 @@
 				A5B229E01F844244009FF359 /* Background2.png */,
 				A5B229E21F84424C009FF359 /* Background3.png */,
 				A5B229E41F8444E7009FF359 /* Halo.mp3 */,
-				A53AC13A1F854C400098EE59 /* Piano1.mp3 */,
 				A53AC13E1F8551640098EE59 /* OnePlayerButton.png */,
 				A53AC1401F8552210098EE59 /* TwoPlayersButton.png */,
-				A53AC1421F8552240098EE59 /* SettingsButton.png */,
 				A59A0AE71FD388F100798142 /* 3DModel.png */,
-				A59A0AEF1FD39AD300798142 /* ChessBackground.png */,
 				A59A0AF71FD39DB700798142 /* ChessBoard.png */,
 				A59A0AFB1FD39EB500798142 /* HomeButton.png */,
 				A59A0AF51FD39CDC00798142 /* BG.jpg */,
@@ -217,7 +208,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A53AC13B1F854C400098EE59 /* Piano1.mp3 in Resources */,
 				A5B229D51F8441E8009FF359 /* LaunchScreen.storyboard in Resources */,
 				A538A7B01FD139AC00DA5FA1 /* art.scnassets in Resources */,
 				A53AC1391F8531CF0098EE59 /* ChessTitle.png in Resources */,
@@ -225,12 +215,10 @@
 				A59A0AF81FD39DB800798142 /* ChessBoard.png in Resources */,
 				A53AC1411F8552210098EE59 /* TwoPlayersButton.png in Resources */,
 				A5B229E51F8444E7009FF359 /* Halo.mp3 in Resources */,
-				A53AC1431F8552240098EE59 /* SettingsButton.png in Resources */,
 				A5B229D21F8441E8009FF359 /* Assets.xcassets in Resources */,
 				A59A0AF61FD39CDD00798142 /* BG.jpg in Resources */,
 				A5B229CD1F8441E8009FF359 /* Main.storyboard in Resources */,
 				A5B229E31F84424C009FF359 /* Background3.png in Resources */,
-				A59A0AF01FD39AD400798142 /* ChessBackground.png in Resources */,
 				A5B229E11F844244009FF359 /* Background2.png in Resources */,
 				A59A0AE81FD388F100798142 /* 3DModel.png in Resources */,
 				A59A0AFC1FD39EB600798142 /* HomeButton.png in Resources */,

@@ -36,7 +36,7 @@ class GameViewController: UIViewController {
         let mainScene = SCNScene(named: "art.scnassets/chesstable.dae")
 //        
 //        print(mainScene)
-        setupLighting(scene: mainScene!)
+//        setupLighting(scene: mainScene!)
         return mainScene!
     }
     func createFloorNode() -> SCNNode {
@@ -49,7 +49,7 @@ class GameViewController: UIViewController {
         let ambientLight = SCNNode()
         ambientLight.light = SCNLight()
         ambientLight.light!.type = SCNLight.LightType.ambient
-        ambientLight.light!.color = UIColor.green
+        ambientLight.light!.color = UIColor.white
         scene.rootNode.addChildNode(ambientLight)
 
 
