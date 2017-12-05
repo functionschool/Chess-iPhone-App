@@ -13,6 +13,7 @@ class MenuScreen: UIViewController {
 
     var timer = Timer()
     var menuMusic = AVAudioPlayer()
+
     
     
     @IBOutlet var previewBG: UIImageView!
@@ -109,7 +110,7 @@ class MenuScreen: UIViewController {
             moveRight = true
         }
     
-        print("Preview Picture x-coordinate: \(x)")
+        //print("Preview Picture x-coordinate: \(x)")
         
         
         let alpha = pressAnywhereToStart.alpha
@@ -178,7 +179,7 @@ class MenuScreen: UIViewController {
             timer.invalidate()
         }
         
-        print("Menu's Alpha: \(menuBG.alpha)")
+        //print("Menu's Alpha: \(menuBG.alpha)")
         
     }
 

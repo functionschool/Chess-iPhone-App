@@ -40,6 +40,8 @@
 		A5B229E11F844244009FF359 /* Background2.png in Resources */ = {isa = PBXBuildFile; fileRef = A5B229E01F844244009FF359 /* Background2.png */; };
 		A5B229E31F84424C009FF359 /* Background3.png in Resources */ = {isa = PBXBuildFile; fileRef = A5B229E21F84424C009FF359 /* Background3.png */; };
 		A5B229E51F8444E7009FF359 /* Halo.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A5B229E41F8444E7009FF359 /* Halo.mp3 */; };
+		A5E0B9D81FD4CF51001CD7CD /* Extension3DChessPiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E0B9D71FD4CF51001CD7CD /* Extension3DChessPiece.swift */; };
+		A5E0B9DA1FD4D174001CD7CD /* Piece3D.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E0B9D91FD4D174001CD7CD /* Piece3D.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +80,8 @@
 		A5B229E01F844244009FF359 /* Background2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Background2.png; sourceTree = "<group>"; };
 		A5B229E21F84424C009FF359 /* Background3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Background3.png; sourceTree = "<group>"; };
 		A5B229E41F8444E7009FF359 /* Halo.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Halo.mp3; sourceTree = "<group>"; };
+		A5E0B9D71FD4CF51001CD7CD /* Extension3DChessPiece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension3DChessPiece.swift; sourceTree = "<group>"; };
+		A5E0B9D91FD4D174001CD7CD /* Piece3D.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Piece3D.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +131,8 @@
 				A53AC1361F84A74E0098EE59 /* GameScreen.swift */,
 				A53AC1181F84A0BC0098EE59 /* Piece.swift */,
 				A53AC11A1F84A0D60098EE59 /* Pawn.swift */,
+				A5E0B9D71FD4CF51001CD7CD /* Extension3DChessPiece.swift */,
+				A5E0B9D91FD4D174001CD7CD /* Piece3D.swift */,
 				A53AC11E1F84A0F80098EE59 /* Bishop.swift */,
 				A53AC1341F84A6910098EE59 /* Knight.swift */,
 				A53AC1221F84A13B0098EE59 /* Rook.swift */,
@@ -234,6 +240,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				A53AC12D1F84A1A30098EE59 /* ChessBoard.swift in Sources */,
+				A5E0B9DA1FD4D174001CD7CD /* Piece3D.swift in Sources */,
+				A5E0B9D81FD4CF51001CD7CD /* Extension3DChessPiece.swift in Sources */,
 				A53AC1231F84A13B0098EE59 /* Rook.swift in Sources */,
 				A53AC1191F84A0BC0098EE59 /* Piece.swift in Sources */,
 				A53AC1291F84A1650098EE59 /* Dummy.swift in Sources */,
