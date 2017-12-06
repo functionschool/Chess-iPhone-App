@@ -2,8 +2,11 @@
 //  GameViewController.swift
 //  test
 //
-//  Created by Gilbert Carrillo on 10/19/17.
-//  Copyright © 2017 Gilbert Carrillo. All rights reserved.
+//
+//  Created by George Torres  on 10/3/17.
+//  All rights reserved.
+//
+
 //
 
 /*

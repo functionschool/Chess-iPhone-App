@@ -2,7 +2,7 @@
 //  BoardIndex.swift
 //  Chess
 //
-//  Created by Kousei Richeson on 10/3/17.
+//  Created by Kousei Richeson & Gilbert Carrillo  on 10/3/17.
 //  Copyright © 2017 Kousei Richeson. All rights reserved.
 //
 //sructure that contains row and column of the chesss board
