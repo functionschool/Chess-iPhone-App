@@ -14,6 +14,8 @@ class Queen: UIChessPiece {
         
         super.init(frame: frame)
         
+        //display two types of queen pieces
+        //one for each player
         if color == UIColor.black {
             self.text = "♛"
         }
@@ -21,6 +23,8 @@ class Queen: UIChessPiece {
             self.text = "♕"
         }
         
+        //set color, font and
+        //let user drag
         self.isOpaque = false
         self.textColor = color
         self.isUserInteractionEnabled = true
@@ -33,17 +37,18 @@ class Queen: UIChessPiece {
         
     }
     
+       //check if the move the user is making, is valid for this certain piece
     func doesMoveSeemFine(fromIndex source: BoardIndex, toIndex dest: BoardIndex) -> Bool {
         
         if source.row == dest.row || source.col == dest.col {
-            return true
+            return true //valid move
         }
         
         if abs(dest.row - source.row) == abs(dest.col - source.col) {
-            return true
+            return true //valid move
         }
         
-        return false
+        return false //invalid move
         
     }
     

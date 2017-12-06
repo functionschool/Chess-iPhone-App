@@ -14,6 +14,8 @@ class Knight: UIChessPiece {
         
         super.init(frame: frame)
         
+        //display two types of knight pieces
+        //one for each player
         if color == UIColor.black {
             self.text = "♞"
         }
@@ -21,6 +23,8 @@ class Knight: UIChessPiece {
             self.text = "♘"
         }
         
+        //set color, font and
+        //let user drag
         self.isOpaque = false
         self.textColor = color
         self.isUserInteractionEnabled = true
@@ -33,19 +37,22 @@ class Knight: UIChessPiece {
         
     }
     
+    
+    //check if the move the user is making, is valid for this certain piece
     func doesMoveSeemFine(fromIndex source: BoardIndex, toIndex dest: BoardIndex) -> Bool {
         
+        //check validation moves
         let validMoves = [(source.row-1, source.col+2), (source.row-2, source.col+1), (source.row-2, source.col-1), (source.row-1, source.col-2), (source.row+1, source.col-2), (source.row+2, source.col-1), (source.row+2, source.col+1), (source.row+1, source.col+2)]
         
         for(validRow, validCol) in validMoves {
             
             if dest.row == validRow && dest.col == validCol {
-                return true
+                return true //move is valid
             }
             
         }
         
-        return false
+        return false  //dont move if invalid move is tried
         
     }
     

@@ -8,8 +8,10 @@
 
 import UIKit
 
-
+//get the cordinates of every standard chess piece
 protocol Piece {
-    var x: CGFloat {get set}
-    var y: CGFloat {get set}
+    
+    //get coordintates of piece on screen
+    var x: CGFloat {get set}  //set the x location
+    var y: CGFloat {get set} //set the y location
 }

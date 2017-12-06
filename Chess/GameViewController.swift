@@ -5,6 +5,12 @@
 //  Created by Gilbert Carrillo on 10/19/17.
 //  Copyright © 2017 Gilbert Carrillo. All rights reserved.
 //
+
+/*
+ Game View Controller for the 3D model
+ 
+*/
+
 import UIKit
 import QuartzCore
 import SceneKit

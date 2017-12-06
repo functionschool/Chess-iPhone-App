@@ -18,7 +18,7 @@ class ChessBoard: NSObject {
     var blackKing: King!
     
     func getIndex(forChessPiece chessPieceToFind: UIChessPiece) -> BoardIndex? {
-        
+        //get index for every chess piece
         for row in 0..<ROWS{
             for col in 0..<COLS{
                 let aChessPiece = board[row][col] as? UIChessPiece
@@ -32,7 +32,7 @@ class ChessBoard: NSObject {
         
     }
     
-    
+    //remove piece from board, scren and array
     func remove(piece: Piece) {
         if let chessPiece = piece as? UIChessPiece {
             
@@ -50,12 +50,13 @@ class ChessBoard: NSObject {
             
         }
     }
-    
+    //place the chess pieces on the board
     func place(chessPiece: UIChessPiece, toIndex destIndex: BoardIndex, toOrigin destOrigin: CGPoint) {
         chessPiece.frame.origin = destOrigin
         board[destIndex.row][destIndex.col] = chessPiece
     }
     
+    //center the pieces on the tiles
     static func indexOf(origin: CGPoint) -> BoardIndex {
         
         let row = (Int(origin.y) - GameScreen.SPACE_FROM_TOP_EDGE) / GameScreen.TILE_SIZE
@@ -65,7 +66,7 @@ class ChessBoard: NSObject {
         
     }
     
-    
+    //get the frame of the board
     static func getFrame(forRow row: Int, forCol col: Int) -> CGRect {
         
         let x = CGFloat(GameScreen.SPACE_FROM_LEFT_EDGE + col * GameScreen.TILE_SIZE)
@@ -87,6 +88,7 @@ class ChessBoard: NSObject {
                 switch row {
                 
                 //We only need case 0, 1, 6, 7 because thats the only rows pieces go on
+                //simulate the chess board and create it
                 case 0:
                     
                     switch col {
@@ -116,7 +118,7 @@ class ChessBoard: NSObject {
                 case 6:
                     board[row][col] = Pawn(frame: ChessBoard.getFrame(forRow: row, forCol: col), color: UIColor.white, vc: vc)
                 case 7:
-                    
+                    //create the board and places the pieces
                     switch col {
                     case 0:
                         board[row][col] = Rook(frame: ChessBoard.getFrame(forRow: row, forCol: col), color: UIColor.white, vc: vc)
