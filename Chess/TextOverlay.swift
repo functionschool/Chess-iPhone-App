@@ -26,7 +26,6 @@ class TextOverlay: SKScene{
         turnNode.fontColor = .white
         turnNode.horizontalAlignmentMode = .left
         turnNode.verticalAlignmentMode = .bottom
-        //turnNode.position = CGPoint(x: -size.width/2 + 20, y: size.height/2 - 40)
         turnNode.position = CGPoint(x: -size.width/4, y: -size.height/2 + 20)
         turnNode.name = "turn"
         addChild(turnNode)
