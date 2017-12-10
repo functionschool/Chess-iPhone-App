@@ -1,7 +1,3 @@
-//
-//  Created by George Torres  on 10/3/17.
-//  All rights reserved.
-//
 
 import SceneKit
 

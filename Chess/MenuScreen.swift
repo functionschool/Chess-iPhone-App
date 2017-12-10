@@ -2,12 +2,9 @@
 //  ViewController.swift
 //  Chess
 //
-//  Created by Kousei Richeson & Gilbert Carrillo  on 10/3/17.
+//  Created by Kousei Richeson on 10/3/17.
 //  Copyright © 2017 Kousei Richeson. All rights reserved.
 //
-
-//main menu screen
-
 
 import UIKit
 import AVFoundation
@@ -34,48 +31,39 @@ class MenuScreen: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        startMoveBackground()//start up animation
-        
-        //background music inside app
+        startMoveBackground()
+        //Good job Gilbert!
         let audioPath01 = Bundle.main.path(forResource: "Halo", ofType: "mp3")
         do{
             try menuMusic = AVAudioPlayer(contentsOf: URL(fileURLWithPath: audioPath01!))
         } catch {
             //error
         }
-        
-        //constantly play music
         menuMusic.prepareToPlay()
         menuMusic.numberOfLoops = -1
         menuMusic.play()
         
-        pressAnywhereToStart.alpha = 0 //transition to main menu after start up animation
+        pressAnywhereToStart.alpha = 0
         menuBG.alpha = 0
         chessMenuTitle.alpha = 0
         onePlayerButton.alpha = 0
         twoPlayersButton.alpha = 0
         threeDModel.alpha = 0
         
-       /*main menu buttons*/
         onePlayerButton.isHidden = true
         twoPlayersButton.isHidden = true
         threeDModel.isHidden = true
         
     }
 
-    
-     /*  set up destination after main menu button is pressed  */
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "singleplayer" || segue.identifier == "multiplayer" {
             let destVC1 = segue.destination as! GameScreen
-           
-             /* check if user selected singleplayer, to play against ai */
             if segue.identifier == "singleplayer" {
                 destVC1.isAgainstAI = true
             }
             
-             /* check if user selected multiplayer */
             if segue.identifier == "multiplayer" {
                 destVC1.isAgainstAI = false
             }
@@ -92,11 +80,7 @@ class MenuScreen: UIViewController {
         return true
     }
     
-    /*
-     function startMoveBackground:
-     this function automatically displays the chess logo and animation,
-      once the application starts
-     */
+    
     func startMoveBackground() {
         
         timer = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(MenuScreen.moveBackground), userInfo: nil, repeats: true)
@@ -105,11 +89,7 @@ class MenuScreen: UIViewController {
     
     var moveRight = true
     var fadeOut = false
-    /*
-     function startMoveBackground:
-     this function automatically displays the chess logo and animation,
-     until user presses on the screen to continue
-     */
+    
     func moveBackground() {
         
         var x = previewBG.frame.origin.x
@@ -151,11 +131,7 @@ class MenuScreen: UIViewController {
         
     }
 
-    /*
-     function presssedAnywhere:
-     this function waits until the user presses on the screen,
-     to transition into the next screen
-    */
+    
     @IBAction func pressedAnywhere(_ sender: Any) {
         
         timer.invalidate()
@@ -169,24 +145,19 @@ class MenuScreen: UIViewController {
     }
     
     
-    /*
-     function startChangeScrens:
-     this function changes screens after func pressedAnywhere
-     */
+    
     func startChangeScreens() {
         
         timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(MenuScreen.changeScreens), userInfo: nil, repeats: true)
     }
     
-    var changed = false  //check if the screen has changed
+    var changed = false
     func changeScreens() {
         
         let previewAlpha = previewBG.alpha
         let pressAnywhereAlpha = pressAnywhereToStart.alpha
         let menuAlpha = menuBG.alpha
         
-        
-        //check to see if the app has already changed screens
         if (changed == false) {
             previewBG.alpha = previewAlpha - 0.01
             chessPreviewTitle.alpha = previewAlpha - 0.01

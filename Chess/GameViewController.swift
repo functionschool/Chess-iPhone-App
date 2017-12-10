@@ -12,7 +12,7 @@
 /*
  Game View Controller for the 3D model
  
-*/
+ */
 
 import UIKit
 import QuartzCore
@@ -24,21 +24,14 @@ let distance:Float = 13.85
 var first: Bool = true
 var Current: SCNNode!
 var mainScene:SCNScene!
-var whiteTurn: Bool = true
 var board:[[String]] = []
+var place:[[SCNNode]] = []
 class GameViewController: UIViewController {
-    var myChessGame: ChessGame!
+
+    var myChessGame: ChessGame3D!
     var textOverlay: TextOverlay!
     var isAgainstAI: Bool!
-    var r0:[SCNNode] = []
-    var r1:[SCNNode] = []
-    var r2:[SCNNode] = []
-    var r3:[SCNNode] = []
-    var r4:[SCNNode] = []
-    var r5:[SCNNode] = []
-    var r6:[SCNNode] = []
-    var r7:[SCNNode] = []
-    var place:[[SCNNode]] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         //Import the models
@@ -51,14 +44,13 @@ class GameViewController: UIViewController {
         sceneView.allowsCameraControl = true
         //Add a floor
         mainScene!.rootNode.addChildNode(createFloorNode())
-        
-        //Super impose text over screen
+        //isAgainstAI = true
+        //  Super impose text over screen
         sceneView.overlaySKScene = TextOverlay(size: view.frame.size)
         textOverlay = sceneView.overlaySKScene as! TextOverlay
-        
-        //Set up the grid for the board
-        setBoardGrid()
-        //Handle taps
+        myChessGame = ChessGame3D.init(viewController: self)
+        myChessGame.SetBoard(rootNode: (mainScene?.rootNode)!)//Set up the grid for the board
+        //    Handle taps
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         sceneView.addGestureRecognizer(tapGesture)
         
@@ -66,48 +58,12 @@ class GameViewController: UIViewController {
     }
     
     func createMainScene() -> SCNScene {
+        
         let mainScene = SCNScene(named: "art.scnassets/chesstable.dae")
-        var z:Float=0
-        var x:Float=0
-        var node:SCNNode
+        
         //Load in the top row, on the black side
-        SetUpBoard(z: z, rootNode: (mainScene?.rootNode)!, white: false)
-        
-        //Change row selection
-        z = 7
-        
-        //set up the rest of the matrix for the rows in between
-        place+=[r0, r1, r2, r3, r4, r5, r6]
-        for i in 1...6 {
-            for _ in 0...7 {
-                place[i].append(mainScene!.rootNode)
-            }
-        }
-        
-        //Load in the top row, on the white side
-        SetUpBoard(z: z, rootNode: (mainScene?.rootNode)!, white: true)
-        
-        place.append(r7)
-        //Load in the black pawns
-        z=1
-        for i in 0...7 {
-            node = createPawnNode(x: false)
-            mainScene!.rootNode.addChildNode(node)
-            node.runAction(SCNAction.move(to: SCNVector3(originX-distance * x,originY,originZ-distance * z ), duration: 0))
-            place[1][i] = node
-            x+=1
-        }
-        z=6
-        x=0
-        
-        //Load in the white pawns
-        for i in 0...7 {
-            node = createPawnNode(x: true)
-            mainScene!.rootNode.addChildNode(node)
-            node.runAction(SCNAction.move(to: SCNVector3(originX-distance * x,originY,originZ-distance * z ), duration: 0))
-            place[6][i] = node
-            x+=1
-        }
+        //  print(SCNScene(named: "art.scnassets/chesstable.dae")?.rootNode.name!)
+        //  myChessGame.SetBoard(rootNode: (mainScene?.rootNode)!)
         
         return mainScene!
     }
@@ -119,173 +75,6 @@ class GameViewController: UIViewController {
     }
     
     
-    func createKingNode(x: Bool) -> SCNNode{
-        let Scene = SCNScene(named: "art.scnassets/pieces.dae")
-        if(x==false){
-            let Bnode = Scene!.rootNode.childNode(withName: "King_Black", recursively: true)!
-            return Bnode
-        }
-        else{
-            let Wnode = Scene!.rootNode.childNode(withName: "King_White", recursively: true)!
-            return Wnode
-            
-        }
-        
-    }
-    
-    func createQueenNode(x: Bool) -> SCNNode{
-        let Scene = SCNScene(named: "art.scnassets/pieces.dae")
-        var node: SCNNode
-        if(x==false){
-            node = Scene!.rootNode.childNode(withName: "Queen_Black", recursively: true)!
-        }
-        else{
-            node = Scene!.rootNode.childNode(withName: "Queen_White", recursively: true)!
-            
-        }
-        
-        return node
-    }
-    
-    func createRookNode(x: Bool) -> SCNNode{
-        let Scene = SCNScene(named: "art.scnassets/pieces.dae")
-        var node: SCNNode
-        if(x==false){
-            node = Scene!.rootNode.childNode(withName: "Rook_Black", recursively: true)!
-        }
-        else{
-            node = Scene!.rootNode.childNode(withName: "Rook_White", recursively: true)!
-            
-        }
-        
-        return node
-    }
-    
-    func createKnightNode(x: Bool) -> SCNNode{
-        let Scene = SCNScene(named: "art.scnassets/pieces.dae")
-        var node: SCNNode
-        if(x==false){
-            node = Scene!.rootNode.childNode(withName: "Knight_Black", recursively: true)!
-        }
-        else{
-            node = Scene!.rootNode.childNode(withName: "Knight_Whiite", recursively: true)!
-            
-        }
-        
-        return node
-    }
-    
-    func createBishopNode(x: Bool) -> SCNNode{
-        let Scene = SCNScene(named: "art.scnassets/pieces.dae")
-        var node: SCNNode
-        if(x==false){
-            node = Scene!.rootNode.childNode(withName: "Bishop_Black", recursively: true)!
-        }
-        else{
-            node = Scene!.rootNode.childNode(withName: "Bishop_White", recursively: true)!
-            
-        }
-        
-        return node
-    }
-    func createPawnNode(x: Bool) -> SCNNode{
-        let Scene = SCNScene(named: "art.scnassets/pieces.dae")
-        var node: SCNNode
-        if(x==false){
-            node = Scene!.rootNode.childNode(withName: "Pawn_Black", recursively: true)!
-        }
-        else{
-            node = Scene!.rootNode.childNode(withName: "Pawn_White", recursively: true)!
-            
-        }
-        
-        return node
-    }
-    
-    func SetUpBoard(z: Float, rootNode: SCNNode, white: Bool) {
-        //Add in the pieces from left to right
-        var x:Float=0
-        var node:SCNNode
-        node = createRookNode(x: white)
-        rootNode.addChildNode(node)
-        node.runAction(SCNAction.move(to: SCNVector3(originX-distance * x,originY,originZ-distance * z ), duration: 0))
-        if z == 0{
-            r0.append(node)
-        }
-        else{
-            r7.append(node)
-        }
-        x+=1
-        node = createKnightNode(x: white)
-        rootNode.addChildNode(node)
-        node.runAction(SCNAction.move(to: SCNVector3(originX-distance * x,originY,originZ-distance * z ), duration: 0))
-        if z == 0{
-            r0.append(node)
-        }
-        else{
-            r7.append(node)
-        }
-        x+=1
-        node = createBishopNode(x: white)
-        rootNode.addChildNode(node)
-        node.runAction(SCNAction.move(to: SCNVector3(originX-distance * x,originY,originZ-distance * z ), duration: 0))
-        if z == 0{
-            r0.append(node)
-        }
-        else{
-            r7.append(node)
-        }
-        x+=1
-        node = createQueenNode(x: white)
-        rootNode.addChildNode(node)
-        node.runAction(SCNAction.move(to: SCNVector3(originX-distance * x,originY,originZ-distance * z ), duration: 0))
-        if z == 0{
-            r0.append(node)
-        }
-        else{
-            r7.append(node)
-        }
-        x+=1
-        node = createKingNode(x: white)
-        rootNode.addChildNode(node)
-        node.runAction(SCNAction.move(to: SCNVector3(originX-distance * x,originY,originZ-distance * z ), duration: 0))
-        if z == 0{
-            r0.append(node)
-        }
-        else{
-            r7.append(node)
-        }
-        x+=1
-        node = createBishopNode(x: white)
-        rootNode.addChildNode(node)
-        node.runAction(SCNAction.move(to: SCNVector3(originX-distance * x,originY,originZ-distance * z ), duration: 0))
-        if z == 0{
-            r0.append(node)
-        }
-        else{
-            r7.append(node)
-        }
-        x+=1
-        node = createKnightNode(x: white)
-        rootNode.addChildNode(node)
-        node.runAction(SCNAction.move(to: SCNVector3(originX-distance * x,originY,originZ-distance * z ), duration: 0))
-        if z == 0{
-            r0.append(node)
-        }
-        else{
-            r7.append(node)
-        }
-        x+=1
-        node = createRookNode(x: white)
-        rootNode.addChildNode(node)
-        node.runAction(SCNAction.move(to: SCNVector3(originX-distance * x,originY,originZ-distance * z ), duration: 0))
-        if z == 0{
-            r0.append(node)
-        }
-        else{
-            r7.append(node)
-        }
-    }
     
     func setupLighting(scene:SCNScene){
         let ambientLight = SCNNode()
@@ -316,53 +105,6 @@ class GameViewController: UIViewController {
         return true
     }
     
-    
-    func setBoardGrid(){
-        //Create Matrix
-        var row0:[String] = ["0", "1", "2", "3", "4", "5", "6", "7"]
-        var row1:[String] = ["0", "1", "2", "3", "4", "5", "6", "7"]
-        var row2:[String] = ["0", "1", "2", "3", "4", "5", "6", "7"]
-        var row3:[String] = ["0", "1", "2", "3", "4", "5", "6", "7"]
-        var row4:[String] = ["0", "1", "2", "3", "4", "5", "6", "7"]
-        var row5:[String] = ["0", "1", "2", "3", "4", "5", "6", "7"]
-        var row6:[String] = ["0", "1", "2", "3", "4", "5", "6", "7"]
-        var row7:[String] = ["0", "1", "2", "3", "4", "5", "6", "7"]
-        board += [row0, row1, row2, row3, row4, row5, row6, row7]
-        
-        //Set all tile IDs to corrsponding spot on the grid, for piece movement
-        board[7][7]="ID202"; board[7][6]="ID210";board[7][5]="ID218"; board[7][4]="ID226"; board[7][3]="ID234";
-        board[7][2]="ID274";board[7][1]="ID266"; board[7][0]="ID186"
-        
-        board[6][7]="ID314"; board[6][6]="ID346";board[6][5]="ID306"; board[6][4]="ID370"; board[6][3]="ID418";
-        board[6][2]="ID426";board[6][1]="ID378"; board[6][0]="ID330"
-        
-        board[5][7]="ID322"; board[5][6]="ID362";board[5][5]="ID386"; board[5][4]="ID410"; board[5][3]="ID394";
-        board[5][2]="ID354";board[5][1]="ID402"; board[5][0]="ID338"
-        
-        board[4][7]="ID53"; board[4][6]="ID106";board[4][5]="ID98"; board[4][4]="ID90"; board[4][3]="ID82";
-        board[4][2]="ID61";board[4][1]="ID40"; board[4][0]="ID74"
-        
-        board[3][7]="ID458"; board[3][6]="ID474";board[3][5]="ID466"; board[3][4]="ID522"; board[3][3]="ID498";
-        board[3][2]="ID530";board[3][1]="ID482"; board[3][0]="ID434"
-        
-        board[2][7]="ID122"; board[2][6]="ID138";board[2][5]="ID130"; board[2][4]="ID154"; board[2][3]="ID162";
-        board[2][2]="ID146";board[2][1]="ID170"; board[2][0]="ID114"
-        
-        board[1][7]="ID178"; board[1][6]="ID290";board[1][5]="ID298"; board[1][4]="ID250"; board[1][3]="ID282";
-        board[1][2]="ID258";board[1][1]="ID242"; board[1][0]="ID194"
-        
-        board[0][7]="ID442"; board[0][6]="ID514";board[0][5]="ID490"; board[0][4]="ID506"; board[0][3]="ID554";
-        board[0][2]="ID546";board[0][1]="ID538"; board[0][0]="ID450"
-    }
-    
-    func isWhite(Piece: SCNNode) -> Bool{
-        if(Piece.name == "King_White" || Piece.name == "Queen_White" ||
-            Piece.name == "Rook_White" || Piece.name == "Knight_White" || Piece.name ==
-            "Bishop_White" || Piece.name == "Pawn_White"){
-            return true
-        }
-        return false
-    }
     @objc func handleTap(_ gestureRecognize: UIGestureRecognizer){
         
         let sceneView = self.view as! SCNView
@@ -372,7 +114,15 @@ class GameViewController: UIViewController {
         
         //Check for return button push
         if ((p.x>350&&p.x<370) && (p.y>640&&p.y<660)){
-            
+            self.myChessGame.theChessBoard.r0 = []
+            self.myChessGame.theChessBoard.r1 = []
+            self.myChessGame.theChessBoard.r2 = []
+            self.myChessGame.theChessBoard.r3 = []
+            self.myChessGame.theChessBoard.r4 = []
+            self.myChessGame.theChessBoard.r5 = []
+            self.myChessGame.theChessBoard.r6 = []
+            self.myChessGame.theChessBoard.r7 = []
+            place = []
             self.dismiss(animated: true, completion: nil)
         }
         
@@ -384,12 +134,14 @@ class GameViewController: UIViewController {
                 let resultchild: AnyObject = hitResults[0]
                 let result = resultchild.node.parent
                 
-                if(result!.name != "leg" && result!.name != "group_0" &&
-                    result!.name != "SketchUp" && (isWhite(Piece: result!) == whiteTurn && result != mainScene.rootNode)){
+                if(myChessGame.validFirstTap(result: result!)){
                     first = false
                     //Set pointer to piece so we can move it later
                     Current = result
                     
+                }
+                else{
+                    print("wrong turn")
                 }
                 
             }
@@ -397,113 +149,166 @@ class GameViewController: UIViewController {
                 //Reset tap count
                 first = true
                 let resultchild: AnyObject = hitResults[0]
-                let result = resultchild.node.parent
-                //Check if tile was tapped
-                if(result?.name == "group_0"){
-                    var cX = 0
-                    var cZ = 0
-                    //Get piece location in grid
-                    while( cX != 8 && Current != place[cX][cZ] ){
-                        print(cX, cZ)
-                        if(cZ==7){
-                            cX+=1
-                            cZ=0
-                        }
-                        else{
-                            cZ+=1
-                        }
-                    }
-                    var x = 0
-                    var y = 0
-                    //Get tile location in grid
-                    while( x != 8 && resultchild.node?.name != board[x][y] ){
-                        
-                        if(y==7){
-                            x+=1
-                            y=0
-                        }
-                        else{
-                            y+=1
-                        }
-                    }
-                    if x != 8{
-                        //Check if there is a piece in location
-                        if(isWhite(Piece: place[x][y]) != whiteTurn &&
-                            place[x][y] != mainScene.rootNode){
-                            //kill piece
-                            place[x][y].removeFromParentNode()
-                            place[x][y]=mainScene.rootNode
-                            
-                        }
-                        
-                        //Check if location is empty either cause we killed the other guy or there was never one to begin with
-                        if (place[x][y]==mainScene.rootNode){
-                            //move piece
-                            let action = SCNAction.move(to: SCNVector3(originX-distance * Float(y), originY, originZ-distance * Float(x) ), duration: TimeInterval(1.0))
-                            Current?.runAction(action)
-                            //Set old grid location to rootNode indicating empty location
-                            place[cX][cZ] = mainScene.rootNode
-                            //update grid with new piece location
-                            place[x][y] = Current
-                            
-                            if whiteTurn == true{
-                                whiteTurn = false
-                            }
-                            else {
-                                whiteTurn = true
-                            }
-                            
-                        }
-                    }
-                    
+                myChessGame.move(resultchild: resultchild.node)
+                //check if game's over
+                if myChessGame.isGameOver(){
+                    displayWinner()
+                    return
                 }
-                    //check for tapped piece
-                else if(result?.name != "leg" && result!.name != "SketchUp" && result != mainScene.rootNode ){
-                    var cX = 0
-                    var cZ = 0
-                    //Get current location
-                    while( cX != 8 && Current != place[cX][cZ] ){
-                        print(cX, cZ)
-                        if(cZ==7){
-                            cX+=1
-                            cZ=0
-                        }
-                        else{
-                            cZ+=1
-                        }
-                    }
-                    var x = 0
-                    var y = 0
-                    // Get location of piece to attack
-                    while( x != 8 && result != place[x][y] ){
-                        
-                        if(y==7){
-                            x+=1
-                            y=0
-                        }
-                        else{
-                            y+=1
-                        }
-                    }    //check if attacking friendly
-                    if (x != 8 && (isWhite(Piece: place[x][y]) != whiteTurn)){
-                        let action = SCNAction.move(to: SCNVector3(originX-distance * Float(y), originY, originZ-distance * Float(x) ), duration: TimeInterval(1.0))
-                        Current?.runAction(action)//if not move to location and kill piece
-                        result?.removeFromParentNode()
-                        //update grid
-                        place[cX][cZ] = mainScene.rootNode
-                        place[x][y] = Current
-                        if whiteTurn == true{
-                            whiteTurn = false
-                        }
-                        else {
-                            whiteTurn = true
-                        }
-                    }
-                    
+                //check if the pawn should be promoted
+                if shouldPromotePawn(){
+                    promptForPawnPromotion()
                 }
+                else{
+                    resumeGame() //dont prompt for pawn promotion if not possible
+                }
+                
             }
             
         }
         
     }
+    
+    
+    func resumeGame(){
+        //display checks if any
+     //   displayCheckFunction()
+        
+        //display turn on screen
+        textOverlay.updateTurnOnScreen(whiteTurn: myChessGame.whiteTurn)
+        
+        //make AI move, if necessary
+        if isAgainstAI == true && !myChessGame.whiteTurn{
+            myChessGame.makeAIMove()
+            print("AI: -----------------")
+            
+            //check to see if the game has ended,
+            //if so display the winner
+            if myChessGame.isGameOver() {
+                displayWinner()
+                return
+            }
+            
+            if shouldPromotePawn(){
+                myChessGame.promote(pawnToBePromoted: Current, into: "Queen")
+            }
+            
+            displayCheckFunction()
+            
+            textOverlay.updateTurnOnScreen(whiteTurn: myChessGame.whiteTurn)
+        }
+    }
+    
+    //prompt pawn for promotion func
+    //notifies user that pawn can be promoted, and displays an alert
+    func promptForPawnPromotion(){
+        let pawnToPromote = Current
+        
+        let box = UIAlertController(title: "Pawn promotion", message: "Choose Piece", preferredStyle: UIAlertControllerStyle.alert)
+        //ask to promote queen
+        box.addAction(UIAlertAction(title: "Queen", style: UIAlertActionStyle.default, handler: { action in
+            self.myChessGame.promote(pawnToBePromoted: pawnToPromote!, into: action.title!)
+            self.resumeGame()
+        }))
+        //ask to promote knight
+        box.addAction(UIAlertAction(title: "Knight", style: UIAlertActionStyle.default, handler: { action in
+            self.myChessGame.promote(pawnToBePromoted: pawnToPromote!, into: action.title!)
+            self.resumeGame()
+        }))
+        //ask to promote rook
+        box.addAction(UIAlertAction(title: "Rook", style: UIAlertActionStyle.default, handler: { action in
+            self.myChessGame.promote(pawnToBePromoted: pawnToPromote!, into: action.title!)
+            self.resumeGame()
+        }))
+        //ask to promote bishop
+        box.addAction(UIAlertAction(title: "Bishop", style: UIAlertActionStyle.default, handler: { action in
+            self.myChessGame.promote(pawnToBePromoted: pawnToPromote!, into: action.title!)
+            self.resumeGame()
+        }))
+        
+        self.present(box, animated: true, completion: nil)
+        
+    }
+    
+    //check to see if pawn can be promoted
+    func shouldPromotePawn() -> Bool {
+        let index = myChessGame.theChessBoard.getIndex(objectToFind: Current)
+        if(myChessGame.isPawn(piece: Current.name!)){
+            if(myChessGame.isWhite(Piece: Current)){
+                if(index[0] == 0){
+                    return true
+                }
+            }
+            else{
+                if(index[0] == 7){
+                    return true
+                }
+            }
+        }
+        return false
+    }
+    
+    //check to see if player is in check
+    func displayCheckFunction(){
+        let playerChecked = myChessGame.getPlayerChecked()
+        
+        //display a message that player is checked, if elegible
+        if playerChecked != nil {
+            textOverlay.display(text: playerChecked! + " is in check!")
+        }
+        else {
+            textOverlay.display(text: "nothing")
+        }
+    }
+    
+    //func displayWinner
+    //this function pops up a box and lets the user
+    //know that the game has ended.
+    //It displays the winner and asks the user if they would
+    //like to rematch or return to the main menu
+    func displayWinner(){
+        
+        //display a game over message
+        let box = UIAlertController(title: "Game Over", message: "\(myChessGame.winner!) wins", preferredStyle: UIAlertControllerStyle.alert)
+        //display a back to main meny button
+        box.addAction(UIAlertAction(title: "Back to main menu", style: UIAlertActionStyle.default, handler: { action in self.performSegue(withIdentifier: "backToMainMenu", sender: self) }))
+        //display rematch button
+        box.addAction(UIAlertAction(title: "Rematch", style: UIAlertActionStyle.default, handler: {
+            action in
+            
+            //clear screen and board matrix
+            for row in 0..<8 {
+                for col in 0..<8 {
+                    let removePiece = place[row][col]
+                    if removePiece != mainScene!.rootNode {
+                        removePiece.removeFromParentNode()
+                    }
+                }
+            }
+            
+            //create new game
+            self.myChessGame.theChessBoard.r0 = []
+            self.myChessGame.theChessBoard.r1 = []
+            self.myChessGame.theChessBoard.r2 = []
+            self.myChessGame.theChessBoard.r3 = []
+            self.myChessGame.theChessBoard.r4 = []
+            self.myChessGame.theChessBoard.r5 = []
+            self.myChessGame.theChessBoard.r6 = []
+            self.myChessGame.theChessBoard.r7 = []
+            place = []
+            self.myChessGame = ChessGame3D(viewController: self)
+            self.myChessGame.SetBoard(rootNode: mainScene!.rootNode)
+            
+            //update labels with game status
+            //    self.updateTurnOnScreen()
+            //self.displayCheck.text = nil
+        }))
+        
+        self.present(box, animated: true, completion: nil)
+        
+    }
 }
+
+
+
+

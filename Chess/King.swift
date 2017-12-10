@@ -2,7 +2,7 @@
 //  King.swift
 //  Chess
 //
-//  Created by Kousei Richeson & Gilbert Carrillo  on 10/3/17.
+//  Created by Kousei Richeson on 10/3/17.
 //  Copyright © 2017 Kousei Richeson. All rights reserved.
 //
 
@@ -13,16 +13,14 @@ class King: UIChessPiece {
     init(frame: CGRect, color: UIColor, vc: GameScreen) {
         
         super.init(frame: frame)
-        //display two types of king pieces
-        //one for each player
+        
         if color == UIColor.black {
             self.text = "♚"
         }
         else{
             self.text = "♔"
         }
-        //set color, font and
-        //let user drag
+        
         self.isOpaque = false
         self.textColor = color
         self.isUserInteractionEnabled = true
@@ -34,7 +32,7 @@ class King: UIChessPiece {
         vc.view.addSubview(self)
         
     }
-       //check if the move the user is making, is valid for this certain piece
+    
     func doesMoveSeemFine(fromIndex source: BoardIndex, toIndex dest: BoardIndex) -> Bool {
         
         let differenceInRows = abs(dest.row - source.row)
@@ -42,11 +40,11 @@ class King: UIChessPiece {
         
         if case 0...1 = differenceInRows {
             if case 0...1 = differenceInCols {
-                return true //valid move
+                return true
             }
         }
         
-        return false //invalid move
+        return false
         
     }
     
