@@ -26,6 +26,7 @@ var Current: SCNNode!
 var mainScene:SCNScene!
 var board:[[String]] = []
 var place:[[SCNNode]] = []
+var cameraNode: SCNNode!
 class GameViewController: UIViewController {
 
     var myChessGame: ChessGame3D!
@@ -35,8 +36,11 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         //Import the models
-        mainScene = createMainScene()
         
+        mainScene = createMainScene()
+       createCamera()
+        cameraNode = mainScene.rootNode.childNode(withName: "skp_camera_Last_Saved_SketchUp_View", recursively: true)
+        cameraNode?.camera?.zFar = 6000
         let sceneView = self.view as! SCNView
         //Set scene to the one we created
         sceneView.scene = mainScene
@@ -100,13 +104,44 @@ class GameViewController: UIViewController {
         scene.rootNode.addChildNode(lightNode)
     }
     
+    func createCamera(){
+        //position 1 160.838 237.945 -208.809 2.52834 -0.0076284 3.14159
+        //position 2
+        //position 3 160.838
+        //position 4
+        //psoition 5
+        let cameraNode = mainScene.rootNode.childNode(withName: "skp_camera_Last_Saved_SketchUp_View", recursively: true)
+//        cameraNode?.camera?.zFar = 6000
+//        cameraNode?.position.x = 140
+//        cameraNode?.position.y = 240
+//        cameraNode?.position.z = -142
+//        cameraNode?.eulerAngles.x = 2.3
+//        cameraNode?.eulerAngles.y = -0.0076
+//        cameraNode?.eulerAngles.z = 3.14159
+//        cameraNode?.rotation.x = 0.00115949
+//        cameraNode?.rotation.y = 0.912763
+//        cameraNode?.rotation.z = 0.408487
+//
+        cameraNode?.position.x = 140
+        cameraNode?.position.y = 240
+        cameraNode?.position.z = 95.2144
+        cameraNode?.eulerAngles.x = -0.819961
+        cameraNode?.eulerAngles.y = 0.011527
+        cameraNode?.eulerAngles.z = -0.00896321
+        cameraNode?.rotation.x = -0.999832
+        cameraNode?.rotation.y = 0.0177412
+        cameraNode?.rotation.z = -0.00454787
+
+    }
     
     override var prefersStatusBarHidden: Bool {
         return true
     }
     
     @objc func handleTap(_ gestureRecognize: UIGestureRecognizer){
-        
+        print("position",cameraNode.position.x, cameraNode.position.y, cameraNode.position.z)
+       print("rotation",cameraNode.rotation.x , cameraNode.rotation.y, cameraNode.rotation.z)
+        print("angle",cameraNode.eulerAngles.x , cameraNode.eulerAngles.y, cameraNode.eulerAngles.z)
         let sceneView = self.view as! SCNView
         
         //Get location of tap

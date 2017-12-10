@@ -280,29 +280,29 @@ class BoardSetUp : NSObject{
             board += [row0, row1, row2, row3, row4, row5, row6, row7]
             
             //Set all tile IDs to corrsponding spot on the grid, for piece movement
-            board[7][7]="ID202"; board[7][6]="ID210";board[7][5]="ID218"; board[7][4]="ID226"; board[7][3]="ID234";
-            board[7][2]="ID274";board[7][1]="ID266"; board[7][0]="ID186"
+            board[7][7]="ID77"; board[7][6]="ID76";board[7][5]="ID75"; board[7][4]="ID74"; board[7][3]="ID73";
+            board[7][2]="ID72";board[7][1]="ID71"; board[7][0]="ID70"
             
-            board[6][7]="ID314"; board[6][6]="ID346";board[6][5]="ID306"; board[6][4]="ID370"; board[6][3]="ID418";
-            board[6][2]="ID426";board[6][1]="ID378"; board[6][0]="ID330"
+            board[6][7]="ID67"; board[6][6]="ID66";board[6][5]="ID65"; board[6][4]="ID64"; board[6][3]="ID63";
+            board[6][2]="ID62";board[6][1]="ID61"; board[6][0]="ID60"
             
-            board[5][7]="ID322"; board[5][6]="ID362";board[5][5]="ID386"; board[5][4]="ID410"; board[5][3]="ID394";
-            board[5][2]="ID354";board[5][1]="ID402"; board[5][0]="ID338"
+            board[5][7]="ID57"; board[5][6]="ID56";board[5][5]="ID55"; board[5][4]="ID54"; board[5][3]="ID53";
+            board[5][2]="ID52";board[5][1]="ID51"; board[5][0]="ID50"
             
-            board[4][7]="ID53"; board[4][6]="ID106";board[4][5]="ID98"; board[4][4]="ID90"; board[4][3]="ID82";
-            board[4][2]="ID61";board[4][1]="ID40"; board[4][0]="ID74"
+            board[4][7]="ID47"; board[4][6]="ID46";board[4][5]="ID45"; board[4][4]="ID44"; board[4][3]="ID43";
+            board[4][2]="ID42";board[4][1]="ID41"; board[4][0]="ID40"
             
-            board[3][7]="ID458"; board[3][6]="ID474";board[3][5]="ID466"; board[3][4]="ID522"; board[3][3]="ID498";
-            board[3][2]="ID530";board[3][1]="ID482"; board[3][0]="ID434"
+            board[3][7]="ID37"; board[3][6]="ID36";board[3][5]="ID35"; board[3][4]="ID34"; board[3][3]="ID33";
+            board[3][2]="ID32";board[3][1]="ID31"; board[3][0]="ID30"
             
-            board[2][7]="ID122"; board[2][6]="ID138";board[2][5]="ID130"; board[2][4]="ID154"; board[2][3]="ID162";
-            board[2][2]="ID146";board[2][1]="ID170"; board[2][0]="ID114"
+            board[2][7]="ID27"; board[2][6]="ID26";board[2][5]="ID25"; board[2][4]="ID24"; board[2][3]="ID23";
+            board[2][2]="ID22";board[2][1]="ID21"; board[2][0]="ID20"
             
-            board[1][7]="ID178"; board[1][6]="ID290";board[1][5]="ID298"; board[1][4]="ID250"; board[1][3]="ID282";
-            board[1][2]="ID258";board[1][1]="ID242"; board[1][0]="ID194"
+            board[1][7]="ID17"; board[1][6]="ID16";board[1][5]="ID15"; board[1][4]="ID14"; board[1][3]="ID13";
+            board[1][2]="ID12";board[1][1]="ID11"; board[1][0]="ID10"
             
-            board[0][7]="ID442"; board[0][6]="ID514";board[0][5]="ID490"; board[0][4]="ID506"; board[0][3]="ID554";
-            board[0][2]="ID546";board[0][1]="ID538"; board[0][0]="ID450"
+            board[0][7]="ID07"; board[0][6]="ID06";board[0][5]="ID05"; board[0][4]="ID04"; board[0][3]="ID03";
+            board[0][2]="ID02";board[0][1]="ID01"; board[0][0]="ID00"
             print("All set up")
 
     }

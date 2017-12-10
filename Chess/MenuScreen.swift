@@ -33,7 +33,7 @@ class MenuScreen: UIViewController {
 
         startMoveBackground()
         //Good job Gilbert!
-        let audioPath01 = Bundle.main.path(forResource: "Halo", ofType: "mp3")
+        let audioPath01 = Bundle.main.path(forResource: "Molto Allegro", ofType: "mp3")
         do{
             try menuMusic = AVAudioPlayer(contentsOf: URL(fileURLWithPath: audioPath01!))
         } catch {
