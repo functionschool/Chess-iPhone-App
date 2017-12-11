@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="pBN-Jw-gOv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -63,7 +63,8 @@
                                     <color key="titleColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="Igq-ND-D7s" kind="show" identifier="singleplayer" id="esA-JL-jxM"/>
+                                    <action selector="onePlayerPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YS6-Mj-ZGQ"/>
+                                    <segue destination="pBN-Jw-gOv" kind="show" identifier="singleplayer" id="jBX-lv-aLj"/>
                                 </connections>
                             </button>
                             <button opaque="NO" alpha="0.94999999999999996" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ict-5t-l1x">
@@ -73,17 +74,19 @@
                                     <color key="titleColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="Igq-ND-D7s" kind="show" identifier="multiplayer" id="N3W-VP-YrY"/>
+                                    <action selector="twoPlayersPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oH1-tF-Umk"/>
+                                    <segue destination="pBN-Jw-gOv" kind="show" identifier="multiplayer" id="pVf-ng-q9f"/>
                                 </connections>
                             </button>
                             <button opaque="NO" alpha="0.94999999999999996" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I21-AR-xIS">
                                 <rect key="frame" x="191" y="382" width="168" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="3DModel" image="3DModel.png">
+                                <state key="normal" title="Settings" image="SettingsButton.png">
                                     <color key="titleColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="pBN-Jw-gOv" kind="show" identifier="3DModel" id="8Wr-hl-tho"/>
+                                    <action selector="settingsPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PAJ-p1-XBq"/>
+                                    <segue destination="Igq-ND-D7s" kind="show" id="6s0-s6-vs0"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -510,7 +513,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="3DModel.png" width="885" height="226"/>
         <image name="BG.jpg" width="1024" height="768"/>
         <image name="Background1.png" width="1920" height="1080"/>
         <image name="Background3.png" width="604" height="1075"/>
@@ -518,9 +520,10 @@
         <image name="ChessTitle.png" width="787" height="188"/>
         <image name="HomeButton.png" width="512" height="512"/>
         <image name="OnePlayerButton.png" width="885" height="226"/>
+        <image name="SettingsButton.png" width="885" height="226"/>
         <image name="TwoPlayersButton.png" width="885" height="226"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="esA-JL-jxM"/>
+        <segue reference="pVf-ng-q9f"/>
     </inferredMetricsTieBreakers>
 </document>

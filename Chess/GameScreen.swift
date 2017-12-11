@@ -23,7 +23,7 @@ class GameScreen: UIViewController {
     static var TILE_SIZE: Int = 38
     var myChessGame: ChessGame!
     var chessPieces: [UIChessPiece]!
-    var isAgainstAI: Bool!
+    var isAgainstAI: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()

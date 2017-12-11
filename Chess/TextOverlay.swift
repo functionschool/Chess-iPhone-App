@@ -11,7 +11,7 @@ import SceneKit
 import SpriteKit
 
 class TextOverlay: SKScene{
-    var turnNode: SKLabelNode!
+//    var turnNode: SKLabelNode!
     var checkNode: SKLabelNode!
     
     override init(size: CGSize){
@@ -19,17 +19,7 @@ class TextOverlay: SKScene{
         
         anchorPoint = CGPoint(x: 0.5, y: 0.5)
         scaleMode = .resizeFill
-        
-        turnNode = SKLabelNode(fontNamed: "Avenir-Bold")
-        turnNode.text = "White's turn"
-        
-        turnNode.fontColor = .white
-        turnNode.horizontalAlignmentMode = .left
-        turnNode.verticalAlignmentMode = .bottom
-        //turnNode.position = CGPoint(x: -size.width/2 + 20, y: size.height/2 - 40)
-        turnNode.position = CGPoint(x: -size.width/4, y: -size.height/2 + 20)
-        turnNode.name = "turn"
-        addChild(turnNode)
+
         checkNode = SKLabelNode(fontNamed: "Avenir-Bold")
         checkNode.text = nil
         checkNode.fontColor = .white
@@ -40,16 +30,16 @@ class TextOverlay: SKScene{
         checkNode.name = "check"
         addChild(checkNode)
     }
-    func updateTurnOnScreen(whiteTurn: Bool){
-        if whiteTurn{
-            turnNode.text = "White's turn"
-            turnNode.fontColor = .white
-        }
-        else{
-            turnNode.text = "Black's turn"
-            turnNode.fontColor = .black
-        }
-    }
+//    func updateTurnOnScreen(whiteTurn: Bool){
+//        if whiteTurn{
+//            turnNode.text = "White's turn"
+//            turnNode.fontColor = .white
+//        }
+//        else{
+//            turnNode.text = "Black's turn"
+//            turnNode.fontColor = .black
+//        }
+//    }
     func display(text: String){
         if text == "nothing"{
             checkNode.text = nil

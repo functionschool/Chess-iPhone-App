@@ -13,6 +13,7 @@ class MenuScreen: UIViewController {
 
     var timer = Timer()
     var menuMusic = AVAudioPlayer()
+    var click3 = AVAudioPlayer()
 
     
     
@@ -33,12 +34,21 @@ class MenuScreen: UIViewController {
 
         startMoveBackground()
         //Good job Gilbert!
-        let audioPath01 = Bundle.main.path(forResource: "Molto Allegro", ofType: "mp3")
+        let audioPath01 = Bundle.main.path(forResource: "Nocturne", ofType: "mp3")
         do{
             try menuMusic = AVAudioPlayer(contentsOf: URL(fileURLWithPath: audioPath01!))
         } catch {
             //error
         }
+        
+        let audioPath02 = Bundle.main.path(forResource: "Click3", ofType: "wav")
+        do{
+            try click3 = AVAudioPlayer(contentsOf: URL(fileURLWithPath: audioPath02!))
+        } catch {
+            //error
+        }
+        
+        click3.prepareToPlay()
         menuMusic.prepareToPlay()
         menuMusic.numberOfLoops = -1
         menuMusic.play()
@@ -59,7 +69,7 @@ class MenuScreen: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "singleplayer" || segue.identifier == "multiplayer" {
-            let destVC1 = segue.destination as! GameScreen
+            let destVC1 = segue.destination as! GameViewController
             if segue.identifier == "singleplayer" {
                 destVC1.isAgainstAI = true
             }
@@ -182,7 +192,19 @@ class MenuScreen: UIViewController {
         //print("Menu's Alpha: \(menuBG.alpha)")
         
     }
-
-
+    
+    @IBAction func onePlayerPressed(_ sender: Any) {
+        click3.play()
+    }
+    
+    @IBAction func twoPlayersPressed(_ sender: Any) {
+        click3.play()
+    }
+    
+    
+    @IBAction func settingsPressed(_ sender: Any) {
+        click3.play()
+    }
+    
 }
 

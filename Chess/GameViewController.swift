@@ -16,11 +16,12 @@
 
 import UIKit
 import QuartzCore
+import AVFoundation
 import SceneKit
 let originX:Float = 185.25
 let originY:Float = 118
 let originZ:Float = 28.4
-let distance:Float = 13.85
+let distance:Float = 13.89
 var first: Bool = true
 var Current: SCNNode!
 var mainScene:SCNScene!
@@ -32,6 +33,10 @@ class GameViewController: UIViewController {
     var myChessGame: ChessGame3D!
     var textOverlay: TextOverlay!
     var isAgainstAI: Bool!
+    var timer = Timer()
+    var click1 = AVAudioPlayer()
+    var click2 = AVAudioPlayer()
+    var slide = AVAudioPlayer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,9 +51,9 @@ class GameViewController: UIViewController {
         sceneView.scene = mainScene
         sceneView.showsStatistics = false
         sceneView.allowsCameraControl = true
+        setupLighting(scene: mainScene)
         //Add a floor
         mainScene!.rootNode.addChildNode(createFloorNode())
-        //isAgainstAI = true
         //  Super impose text over screen
         sceneView.overlaySKScene = TextOverlay(size: view.frame.size)
         textOverlay = sceneView.overlaySKScene as! TextOverlay
@@ -57,6 +62,30 @@ class GameViewController: UIViewController {
         //    Handle taps
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         sceneView.addGestureRecognizer(tapGesture)
+        
+        let audioPath01 = Bundle.main.path(forResource: "Click1", ofType: "wav")
+        do{
+            try click1 = AVAudioPlayer(contentsOf: URL(fileURLWithPath: audioPath01!))
+        } catch {
+            //error
+        }
+        click1.prepareToPlay()
+        
+        let audioPath02 = Bundle.main.path(forResource: "Click2", ofType: "wav")
+        do{
+            try click2 = AVAudioPlayer(contentsOf: URL(fileURLWithPath: audioPath02!))
+        } catch {
+            //error
+        }
+        click2.prepareToPlay()
+        
+        let audioPath03 = Bundle.main.path(forResource: "Slide", ofType: "wav")
+        do{
+            try slide = AVAudioPlayer(contentsOf: URL(fileURLWithPath: audioPath03!))
+        } catch {
+            //error
+        }
+        slide.prepareToPlay()
         
         
     }
@@ -73,7 +102,9 @@ class GameViewController: UIViewController {
     }
     func createFloorNode() -> SCNNode {
         let floorNode = SCNNode()
-        floorNode.geometry = SCNFloor()
+        let floor = SCNFloor()
+        floor.reflectivity = 0
+        floorNode.geometry = floor
         floorNode.geometry?.firstMaterial?.diffuse.contents = "floor"
         return floorNode
     }
@@ -90,17 +121,11 @@ class GameViewController: UIViewController {
         
         let lightNode = SCNNode()
         lightNode.light = SCNLight()
-        lightNode.light!.type = SCNLight.LightType.spot
+        lightNode.light!.type = SCNLight.LightType.omni
         lightNode.light!.castsShadow = true
-        lightNode.light!.color = UIColor(white: 0.8, alpha: 1.8    )
-        lightNode.position = SCNVector3Make(150, 400, 60)
-        //lightNode.rotation = SCNVector4Make(1, 0, 0, Float(-M_PI/2.8))
-        lightNode.rotation = SCNVector4Make(1, 0, 0, Float(-Double.pi/2.8))
-        lightNode.light!.spotInnerAngle = 0
-        lightNode.light!.spotOuterAngle = 50
+        lightNode.light!.color = UIColor(red: 1 ,green: 1,blue: 0.85, alpha: 1    )
+        lightNode.position = SCNVector3Make(0, 400, 0)
         lightNode.light!.shadowColor = UIColor.black
-        lightNode.light!.zFar = 500
-        lightNode.light!.zNear = 50
         scene.rootNode.addChildNode(lightNode)
     }
     
@@ -111,28 +136,104 @@ class GameViewController: UIViewController {
         //position 4
         //psoition 5
         let cameraNode = mainScene.rootNode.childNode(withName: "skp_camera_Last_Saved_SketchUp_View", recursively: true)
-//        cameraNode?.camera?.zFar = 6000
-//        cameraNode?.position.x = 140
-//        cameraNode?.position.y = 240
-//        cameraNode?.position.z = -142
-//        cameraNode?.eulerAngles.x = 2.3
-//        cameraNode?.eulerAngles.y = -0.0076
-//        cameraNode?.eulerAngles.z = 3.14159
-//        cameraNode?.rotation.x = 0.00115949
-//        cameraNode?.rotation.y = 0.912763
-//        cameraNode?.rotation.z = 0.408487
-//
+        cameraNode?.camera?.zFar = 6000
         cameraNode?.position.x = 140
         cameraNode?.position.y = 240
-        cameraNode?.position.z = 95.2144
-        cameraNode?.eulerAngles.x = -0.819961
-        cameraNode?.eulerAngles.y = 0.011527
-        cameraNode?.eulerAngles.z = -0.00896321
-        cameraNode?.rotation.x = -0.999832
-        cameraNode?.rotation.y = 0.0177412
-        cameraNode?.rotation.z = -0.00454787
+        cameraNode?.position.z = -142
+        cameraNode?.eulerAngles.x = 2.3
+        cameraNode?.eulerAngles.y = -0.0076
+        cameraNode?.eulerAngles.z = 3.14159
+        cameraNode?.rotation.x = 0.00115949
+        cameraNode?.rotation.y = 0.912763
+        cameraNode?.rotation.z = 0.408487
+//        cameraNode?.(target: mainScene.rootNode.childNode(withName: "group_0", recursively: true))
+//        cameraNode?.position.x = 140
+//        cameraNode?.position.y = 240
+//        cameraNode?.position.z = 95.2144
+//        cameraNode?.eulerAngles.x = -0.819961
+//        cameraNode?.eulerAngles.y = 0.011527
+//        cameraNode?.eulerAngles.z = -0.00896321
+//        cameraNode?.rotation.x = -0.999832
+//        cameraNode?.rotation.y = 0.0177412
+//        cameraNode?.rotation.z = -0.00454787
 
     }
+    
+    
+    func changeCamera(){
+        
+        let sceneView = self.view as! SCNView
+        
+
+        //reset stuff
+        sceneView.backgroundColor = UIColor.black
+        sceneView.alpha = 1
+        isFadingOut = true
+        startFadeNumber = 0
+        
+        timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(self.animateCamera), userInfo: nil, repeats: true)
+
+
+    }
+    
+    var isFadingOut = true
+    var startFadeNumber = 0
+    func animateCamera() {
+        
+        let timeIncrementer: CGFloat = 0.02
+        let sceneView = self.view as! SCNView
+
+        startFadeNumber = startFadeNumber + 1
+        
+        if(startFadeNumber >= 120) {
+        
+            if(isFadingOut == true) {
+                sceneView.alpha = sceneView.alpha - timeIncrementer
+                
+                if(sceneView.alpha <= 0) {
+                    print(myChessGame.whiteTurn)
+                    if(myChessGame.whiteTurn){
+                        cameraNode?.position.x = 140
+                        cameraNode?.position.y = 240
+                        cameraNode?.position.z = -142
+                        cameraNode?.eulerAngles.x = 2.3
+                        cameraNode?.eulerAngles.y = -0.0076
+                        cameraNode?.eulerAngles.z = 3.14159
+                        cameraNode?.rotation.x = 0.00115949
+                        cameraNode?.rotation.y = 0.912763
+                        cameraNode?.rotation.z = 0.408487
+                    }
+                    else{
+                        cameraNode?.position.x = 140
+                        cameraNode?.position.y = 240
+                        cameraNode?.position.z = 95.2144
+                        cameraNode?.eulerAngles.x = -0.819961
+                        cameraNode?.eulerAngles.y = 0.011527
+                        cameraNode?.eulerAngles.z = -0.00896321
+                        
+                        cameraNode?.rotation.x = -0.999832
+                        cameraNode?.rotation.y = 0.0177412
+                        cameraNode?.rotation.z = -0.00454787
+                    }
+                    isFadingOut = false
+
+                }
+                
+            }
+            
+            else{
+                
+                sceneView.alpha = sceneView.alpha + timeIncrementer
+            
+                if(sceneView.alpha > 0.9999999){
+                    timer.invalidate()
+                }
+            }
+            
+        }
+        
+    }
+    
     
     override var prefersStatusBarHidden: Bool {
         return true
@@ -146,9 +247,9 @@ class GameViewController: UIViewController {
         
         //Get location of tap
         let p = gestureRecognize.location(in: sceneView)
-        
+        print(p)
         //Check for return button push
-        if ((p.x>350&&p.x<370) && (p.y>640&&p.y<660)){
+        if ((p.x>0&&p.x<50) && (p.y>00&&p.y<20)){
             self.myChessGame.theChessBoard.r0 = []
             self.myChessGame.theChessBoard.r1 = []
             self.myChessGame.theChessBoard.r2 = []
@@ -160,31 +261,47 @@ class GameViewController: UIViewController {
             place = []
             self.dismiss(animated: true, completion: nil)
         }
-        
+    
         //Insure object was tapped
-        let hitResults = sceneView.hitTest(p, options: [:])
-        if hitResults.count > 0{
+         if first == true{
+        let hitResults = sceneView.hitTest(p, options: [SCNHitTestOption.searchMode: 1, SCNHitTestOption.boundingBoxOnly: 0])
+        var c: Int = 0
+        var resultchild: AnyObject
+        print(hitResults.count)
+        while hitResults.count > c && first{
             //Check if first screen tap
-            if first == true{
-                let resultchild: AnyObject = hitResults[0]
-                let result = resultchild.node.parent
-                
-                if(myChessGame.validFirstTap(result: result!)){
+            print("I'm back")
+                print("Kill me")
+                resultchild = hitResults[c]
+//                var result = resultchild.node
+                print("I'm just here")
+                if(myChessGame.validFirstTap(result: resultchild.node)){
+                    print("First tap")
+                    click1.play()
                     first = false
                     //Set pointer to piece so we can move it later
-                    Current = result
-                    
+                    var index = myChessGame.theChessBoard.getIndex(objectToFind:  resultchild.node)
+                    Current = place[index[0]][index[1]]
                 }
                 else{
+                    //if(resultchild.node.parent?.name! == "group_0"){
+                        //return
+                    //}
                     print("wrong turn")
                 }
-                
+             c += 1
             }
-            else{//If second tap
+        }
+            
+            else {//If second tap
                 //Reset tap count
+                let hitResults = sceneView.hitTest(p, options: [:])
+            if hitResults.count > 0{
+                print("What up man")
                 first = true
                 let resultchild: AnyObject = hitResults[0]
-                myChessGame.move(resultchild: resultchild.node)
+                let vaildMove = myChessGame.move(resultchild: resultchild.node)
+                
                 //check if game's over
                 if myChessGame.isGameOver(){
                     displayWinner()
@@ -194,24 +311,27 @@ class GameViewController: UIViewController {
                 if shouldPromotePawn(){
                     promptForPawnPromotion()
                 }
-                else{
+                else if (vaildMove){
+                    print("here")
+                    click2.play()
+                    slide.play()
                     resumeGame() //dont prompt for pawn promotion if not possible
                 }
-                
             }
+        }
+            
             
         }
         
-    }
-    
+
     
     func resumeGame(){
         //display checks if any
      //   displayCheckFunction()
         
         //display turn on screen
-        textOverlay.updateTurnOnScreen(whiteTurn: myChessGame.whiteTurn)
-        
+        //textOverlay.updateTurnOnScreen(whiteTurn: myChessGame.whiteTurn)
+        changeCamera()
         //make AI move, if necessary
         if isAgainstAI == true && !myChessGame.whiteTurn{
             myChessGame.makeAIMove()
@@ -230,7 +350,7 @@ class GameViewController: UIViewController {
             
             displayCheckFunction()
             
-            textOverlay.updateTurnOnScreen(whiteTurn: myChessGame.whiteTurn)
+           // textOverlay.updateTurnOnScreen(whiteTurn: myChessGame.whiteTurn)
         }
     }
     

@@ -146,6 +146,7 @@ class ChessGame3D: NSObject {
             print(randDestIndex[0], randDestIndex[1], chessPieceToMove.name!)
             let tileID = board[randDestIndex[0]][randDestIndex[1]]
             let tile = mainScene.rootNode.childNode(withName: tileID, recursively: true)
+            
             move(resultchild: tile!)
 
             moveFound = true
@@ -353,8 +354,13 @@ class ChessGame3D: NSObject {
         return false //nobody won
     }
     
+    
+
     //move the chess pieces
-        func move(resultchild: SCNNode){
+        func move(resultchild: SCNNode)-> Bool{
+        
+                var shouldPlaySoundEffects = false
+            
         let result = resultchild.parent
         //Check if tile was tapped
             if(validSecondTap(result: result!)){
@@ -381,7 +387,7 @@ class ChessGame3D: NSObject {
                     //kill piece
                     place[x][y].removeFromParentNode()
                     place[x][y]=mainScene.rootNode
-                    
+                    shouldPlaySoundEffects = true
                 }
                 
                 //Check if location is empty either cause we killed the other guy or there was never one to begin with
@@ -390,9 +396,11 @@ class ChessGame3D: NSObject {
                     //print("No really")
                     theChessBoard.placePiece(cX: cX, cZ: cZ, x: x, y: y)
                     nextTurn()
+                    return true
                 }
             }
         }
+            return false
     }
     
 
@@ -694,9 +702,17 @@ class ChessGame3D: NSObject {
     }
     
     func validFirstTap(result: SCNNode)->Bool{
-        if(result.name != "leg" && result.name != "group_0" &&
-            result.name != "SketchUp" && (isWhite(Piece: result) == whiteTurn && result != mainScene.rootNode)){
-            return true
+        if(result.parent?.name == "group_0" && result.name != "frame"){
+            let resultIndex = theChessBoard.getIndex(objectToFind: result)
+            print(resultIndex[0],resultIndex[1])
+            
+            
+            if (isWhite(Piece: place[resultIndex[0]][resultIndex[1]]) == whiteTurn && place[resultIndex[0]][resultIndex[1]] != mainScene.rootNode){
+//                result.geometry?.firstMaterial?.normal.contents = "carpet"
+                return true
+            }
+        
+            
         }
         return false
     }

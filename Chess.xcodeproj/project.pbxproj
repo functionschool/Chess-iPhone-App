@@ -11,6 +11,14 @@
 		A5161E421FDCCE0500A7E3B0 /* ChessBoard3D.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5161E411FDCCE0500A7E3B0 /* ChessBoard3D.swift */; };
 		A5161E441FDCF41800A7E3B0 /* Molto Allegro.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A5161E431FDCF41700A7E3B0 /* Molto Allegro.mp3 */; };
 		A5161E461FDCF41E00A7E3B0 /* Bassoon Concerto.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A5161E451FDCF41D00A7E3B0 /* Bassoon Concerto.mp3 */; };
+		A5161E4C1FDEBA0600A7E3B0 /* Click2.wav in Resources */ = {isa = PBXBuildFile; fileRef = A5161E481FDEBA0400A7E3B0 /* Click2.wav */; };
+		A5161E4D1FDEBA0600A7E3B0 /* Click1.wav in Resources */ = {isa = PBXBuildFile; fileRef = A5161E491FDEBA0400A7E3B0 /* Click1.wav */; };
+		A5161E4E1FDEBA0600A7E3B0 /* Slide.wav in Resources */ = {isa = PBXBuildFile; fileRef = A5161E4A1FDEBA0500A7E3B0 /* Slide.wav */; };
+		A5161E4F1FDEBA0600A7E3B0 /* Click3.wav in Resources */ = {isa = PBXBuildFile; fileRef = A5161E4B1FDEBA0600A7E3B0 /* Click3.wav */; };
+		A5161E511FDEC1B300A7E3B0 /* SettingsButton.png in Resources */ = {isa = PBXBuildFile; fileRef = A5161E501FDEC1B200A7E3B0 /* SettingsButton.png */; };
+		A5161E531FDEC6F200A7E3B0 /* Nocturne.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A5161E521FDEC6F200A7E3B0 /* Nocturne.mp3 */; };
+		A5161E551FDEC6F800A7E3B0 /* Waltz.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A5161E541FDEC6F700A7E3B0 /* Waltz.mp3 */; };
+		A5161E571FDEC6FB00A7E3B0 /* Autumn.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A5161E561FDEC6FB00A7E3B0 /* Autumn.mp3 */; };
 		A538A7B01FD139AC00DA5FA1 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = A538A7AF1FD139AC00DA5FA1 /* art.scnassets */; };
 		A538A7B21FD13B4300DA5FA1 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A538A7B11FD13B4300DA5FA1 /* GameViewController.swift */; };
 		A538A7B41FD1407700DA5FA1 /* TextOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = A538A7B31FD1407700DA5FA1 /* TextOverlay.swift */; };
@@ -52,6 +60,14 @@
 		A5161E411FDCCE0500A7E3B0 /* ChessBoard3D.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChessBoard3D.swift; sourceTree = "<group>"; };
 		A5161E431FDCF41700A7E3B0 /* Molto Allegro.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Molto Allegro.mp3"; sourceTree = "<group>"; };
 		A5161E451FDCF41D00A7E3B0 /* Bassoon Concerto.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Bassoon Concerto.mp3"; sourceTree = "<group>"; };
+		A5161E481FDEBA0400A7E3B0 /* Click2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Click2.wav; sourceTree = "<group>"; };
+		A5161E491FDEBA0400A7E3B0 /* Click1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Click1.wav; sourceTree = "<group>"; };
+		A5161E4A1FDEBA0500A7E3B0 /* Slide.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Slide.wav; sourceTree = "<group>"; };
+		A5161E4B1FDEBA0600A7E3B0 /* Click3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Click3.wav; sourceTree = "<group>"; };
+		A5161E501FDEC1B200A7E3B0 /* SettingsButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SettingsButton.png; sourceTree = "<group>"; };
+		A5161E521FDEC6F200A7E3B0 /* Nocturne.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Nocturne.mp3; sourceTree = "<group>"; };
+		A5161E541FDEC6F700A7E3B0 /* Waltz.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Waltz.mp3; sourceTree = "<group>"; };
+		A5161E561FDEC6FB00A7E3B0 /* Autumn.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Autumn.mp3; sourceTree = "<group>"; };
 		A538A7AF1FD139AC00DA5FA1 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		A538A7B11FD13B4300DA5FA1 /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		A538A7B31FD1407700DA5FA1 /* TextOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextOverlay.swift; sourceTree = "<group>"; };
@@ -112,8 +128,16 @@
 				A5B229E21F84424C009FF359 /* Background3.png */,
 				A53AC13E1F8551640098EE59 /* OnePlayerButton.png */,
 				A53AC1401F8552210098EE59 /* TwoPlayersButton.png */,
+				A5161E501FDEC1B200A7E3B0 /* SettingsButton.png */,
 				A5161E431FDCF41700A7E3B0 /* Molto Allegro.mp3 */,
 				A5161E451FDCF41D00A7E3B0 /* Bassoon Concerto.mp3 */,
+				A5161E521FDEC6F200A7E3B0 /* Nocturne.mp3 */,
+				A5161E541FDEC6F700A7E3B0 /* Waltz.mp3 */,
+				A5161E561FDEC6FB00A7E3B0 /* Autumn.mp3 */,
+				A5161E491FDEBA0400A7E3B0 /* Click1.wav */,
+				A5161E481FDEBA0400A7E3B0 /* Click2.wav */,
+				A5161E4B1FDEBA0600A7E3B0 /* Click3.wav */,
+				A5161E4A1FDEBA0500A7E3B0 /* Slide.wav */,
 				A59A0AE71FD388F100798142 /* 3DModel.png */,
 				A59A0AF71FD39DB700798142 /* ChessBoard.png */,
 				A59A0AFB1FD39EB500798142 /* HomeButton.png */,
@@ -225,20 +249,28 @@
 			files = (
 				A5B229D51F8441E8009FF359 /* LaunchScreen.storyboard in Resources */,
 				A538A7B01FD139AC00DA5FA1 /* art.scnassets in Resources */,
+				A5161E571FDEC6FB00A7E3B0 /* Autumn.mp3 in Resources */,
+				A5161E531FDEC6F200A7E3B0 /* Nocturne.mp3 in Resources */,
 				A53AC1391F8531CF0098EE59 /* ChessTitle.png in Resources */,
 				A53AC13F1F8551640098EE59 /* OnePlayerButton.png in Resources */,
 				A5161E461FDCF41E00A7E3B0 /* Bassoon Concerto.mp3 in Resources */,
 				A59A0AF81FD39DB800798142 /* ChessBoard.png in Resources */,
 				A53AC1411F8552210098EE59 /* TwoPlayersButton.png in Resources */,
+				A5161E4F1FDEBA0600A7E3B0 /* Click3.wav in Resources */,
 				A5B229D21F8441E8009FF359 /* Assets.xcassets in Resources */,
 				A59A0AF61FD39CDD00798142 /* BG.jpg in Resources */,
+				A5161E4C1FDEBA0600A7E3B0 /* Click2.wav in Resources */,
 				A5B229CD1F8441E8009FF359 /* Main.storyboard in Resources */,
 				A5161E441FDCF41800A7E3B0 /* Molto Allegro.mp3 in Resources */,
 				A5B229E31F84424C009FF359 /* Background3.png in Resources */,
+				A5161E4D1FDEBA0600A7E3B0 /* Click1.wav in Resources */,
+				A5161E511FDEC1B300A7E3B0 /* SettingsButton.png in Resources */,
+				A5161E4E1FDEBA0600A7E3B0 /* Slide.wav in Resources */,
 				A5B229E11F844244009FF359 /* Background2.png in Resources */,
 				A59A0AE81FD388F100798142 /* 3DModel.png in Resources */,
 				A59A0AFC1FD39EB600798142 /* HomeButton.png in Resources */,
 				A5B229DF1F844241009FF359 /* Background1.png in Resources */,
+				A5161E551FDEC6F800A7E3B0 /* Waltz.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -405,6 +437,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = SA9EY248Y9;
 				INFOPLIST_FILE = Chess/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Kousei-Richeson.Chess";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -418,6 +451,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = SA9EY248Y9;
 				INFOPLIST_FILE = Chess/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Kousei-Richeson.Chess";
 				PRODUCT_NAME = "$(TARGET_NAME)";
