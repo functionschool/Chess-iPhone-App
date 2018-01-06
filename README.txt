@@ -1,3 +1,5 @@
+![simulator screen shot - iphone 7 - 2018-01-05 at 23 45 30](https://user-images.githubusercontent.com/23087295/34637398-0cc5e9b8-f273-11e7-89eb-228e4200f839.png)
+
 To compile this project, just open the main Folder in Xcode. Then Click Build.
 
 To install this project onto your iPhone, connect a USB to the computer. Then
