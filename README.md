@@ -1,7 +1,7 @@
 # 3D Chess iOS Application
-<p align="center">
+
 <img src="images/screenshot.png">
-</p>
+
 
 To compile this project, just open the main Folder in Xcode. Then Click Build.
 
