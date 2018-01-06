@@ -1,4 +1,4 @@
-![simulator screen shot - iphone 7 - 2018-01-05 at 23 45 30](https://user-images.githubusercontent.com/23087295/34637423-ebcb590e-f273-11e7-8ba4-9d0b7037081a.png)
+<img scr="truck:docs/screenShot.png">
 
 To compile this project, just open the main Folder in Xcode. Then Click Build.
 
