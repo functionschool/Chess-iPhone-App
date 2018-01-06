@@ -152,6 +152,7 @@ class BoardSetUp : NSObject{
         x+=1
         node = createKnightNode(x: white)
         rootNode.addChildNode(node)
+        node.eulerAngles.y = 30
         node.runAction(SCNAction.move(to: SCNVector3(originX-distance * x,originY,originZ-distance * z ), duration: 0))
         if z == 0{
             r0.append(node)

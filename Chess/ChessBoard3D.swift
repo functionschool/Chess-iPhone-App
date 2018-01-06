@@ -363,7 +363,7 @@ class ChessGame3D: NSObject {
             
         let result = resultchild.parent
         //Check if tile was tapped
-            if(validSecondTap(result: result!)){
+            if(validSecondTap(result: resultchild)){
             var index:[Int] = []
             //get location of current
             index = theChessBoard.getIndex(objectToFind: Current)
@@ -705,10 +705,15 @@ class ChessGame3D: NSObject {
         if(result.parent?.name == "group_0" && result.name != "frame"){
             let resultIndex = theChessBoard.getIndex(objectToFind: result)
             print(resultIndex[0],resultIndex[1])
-            
-            
+
             if (isWhite(Piece: place[resultIndex[0]][resultIndex[1]]) == whiteTurn && place[resultIndex[0]][resultIndex[1]] != mainScene.rootNode){
-//                result.geometry?.firstMaterial?.normal.contents = "carpet"
+                let Scene = SCNScene(named: "art.scnassets/Highlights.dae")
+                let node = Scene?.rootNode.childNode(withName: "Highlight", recursively: true)
+                node?.geometry?.firstMaterial?.diffuse.contents = UIColor.blue
+                mainScene.rootNode.addChildNode(node!)
+                node?.position.x = 182.314 - distance * Float(resultIndex[1])
+                node?.position.y = 117.5
+                node?.position.z = 31.681 - distance * Float(resultIndex[0])
                 return true
             }
         
@@ -717,9 +722,10 @@ class ChessGame3D: NSObject {
         return false
     }
     func validSecondTap(result: SCNNode)->Bool{
-        if(result.name != "leg" && result.name != "SketchUp" && result != mainScene.rootNode){
+        if((result.parent?.name == "group_0" && result.name != "frame")){
             return true
         }
+        print("false man")
         return false
     }
     

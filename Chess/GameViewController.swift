@@ -21,7 +21,10 @@ import SceneKit
 let originX:Float = 185.25
 let originY:Float = 118
 let originZ:Float = 28.4
-let distance:Float = 13.89
+let distance:Float = 13.98
+let hOriginX:Float = 182.314
+let hOriginY:Float = 117.5
+let hOriginZ:Float = 31.681
 var first: Bool = true
 var Current: SCNNode!
 var mainScene:SCNScene!
@@ -29,7 +32,7 @@ var board:[[String]] = []
 var place:[[SCNNode]] = []
 var cameraNode: SCNNode!
 class GameViewController: UIViewController {
-
+//    @IBOutlet var panGesture: UIPanGestureRecognizer!
     var myChessGame: ChessGame3D!
     var textOverlay: TextOverlay!
     var isAgainstAI: Bool!
@@ -37,7 +40,10 @@ class GameViewController: UIViewController {
     var click1 = AVAudioPlayer()
     var click2 = AVAudioPlayer()
     var slide = AVAudioPlayer()
-    
+    var previousLoaction: CGPoint = .zero
+    var cameraPosition: SCNVector3? = nil
+    var cameraAngle: SCNVector3? = nil
+    var movement: Int = 0
     override func viewDidLoad() {
         super.viewDidLoad()
         //Import the models
@@ -50,7 +56,7 @@ class GameViewController: UIViewController {
         //Set scene to the one we created
         sceneView.scene = mainScene
         sceneView.showsStatistics = false
-        sceneView.allowsCameraControl = true
+        sceneView.allowsCameraControl = false
         setupLighting(scene: mainScene)
         //Add a floor
         mainScene!.rootNode.addChildNode(createFloorNode())
@@ -62,6 +68,11 @@ class GameViewController: UIViewController {
         //    Handle taps
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         sceneView.addGestureRecognizer(tapGesture)
+        
+        let panGesture = UIPanGestureRecognizer(target: self, action:
+            
+            #selector(moveCamera(usingGestureRecognizer:)))
+        sceneView.addGestureRecognizer(panGesture)
         
         let audioPath01 = Bundle.main.path(forResource: "Click1", ofType: "wav")
         do{
@@ -156,12 +167,15 @@ class GameViewController: UIViewController {
 //        cameraNode?.rotation.x = -0.999832
 //        cameraNode?.rotation.y = 0.0177412
 //        cameraNode?.rotation.z = -0.00454787
+        cameraPosition = cameraNode?.position
+        cameraAngle = cameraNode?.eulerAngles
+
 
     }
     
     
     func changeCamera(){
-        
+
         let sceneView = self.view as! SCNView
         
 
@@ -248,31 +262,39 @@ class GameViewController: UIViewController {
         //Get location of tap
         let p = gestureRecognize.location(in: sceneView)
         print(p)
-        //Check for return button push
-        if ((p.x>0&&p.x<50) && (p.y>00&&p.y<20)){
-            self.myChessGame.theChessBoard.r0 = []
-            self.myChessGame.theChessBoard.r1 = []
-            self.myChessGame.theChessBoard.r2 = []
-            self.myChessGame.theChessBoard.r3 = []
-            self.myChessGame.theChessBoard.r4 = []
-            self.myChessGame.theChessBoard.r5 = []
-            self.myChessGame.theChessBoard.r6 = []
-            self.myChessGame.theChessBoard.r7 = []
-            place = []
-            self.dismiss(animated: true, completion: nil)
-        }
+//        //Check for return button push
+//        if ((p.x>0&&p.x<50) && (p.y>00&&p.y<20)){
+//            self.myChessGame.theChessBoard.r0 = []
+//            self.myChessGame.theChessBoard.r1 = []
+//            self.myChessGame.theChessBoard.r2 = []
+//            self.myChessGame.theChessBoard.r3 = []
+//            self.myChessGame.theChessBoard.r4 = []
+//            self.myChessGame.theChessBoard.r5 = []
+//            self.myChessGame.theChessBoard.r6 = []
+//            self.myChessGame.theChessBoard.r7 = []
+//            place = []
+//            self.dismiss(animated: true, completion: nil)
+//        }
     
         //Insure object was tapped
-         if first == true{
         let hitResults = sceneView.hitTest(p, options: [SCNHitTestOption.searchMode: 1, SCNHitTestOption.boundingBoxOnly: 0])
+        let button = textOverlay.convertPoint(fromView: p)
+        let hitButton = textOverlay.nodes(at: button)
         var c: Int = 0
         var resultchild: AnyObject
+        if(hitButton.count > 0){
+            pauseScreen()
+        }
         print(hitResults.count)
-        while hitResults.count > c && first{
+                if(first){
+                    while hitResults.count > c {
             //Check if first screen tap
             print("I'm back")
                 print("Kill me")
                 resultchild = hitResults[c]
+                if resultchild.node.parent == mainScene.rootNode{
+                    return
+                }
 //                var result = resultchild.node
                 print("I'm just here")
                 if(myChessGame.validFirstTap(result: resultchild.node)){
@@ -282,24 +304,52 @@ class GameViewController: UIViewController {
                     //Set pointer to piece so we can move it later
                     var index = myChessGame.theChessBoard.getIndex(objectToFind:  resultchild.node)
                     Current = place[index[0]][index[1]]
+                    let moveIndex = myChessGame.getArrayOfPossibleMoves(piece: Current)
+                    var counter = 0
+                    while counter < moveIndex.count{
+                        let Scene = SCNScene(named: "art.scnassets/Highlights.dae")
+                        if( place[moveIndex[counter][0]][moveIndex[counter][1]] == mainScene.rootNode){
+                            let node = Scene?.rootNode.childNode(withName: "Highlight_Moves", recursively: true)
+                            node?.geometry?.firstMaterial?.diffuse.contents = UIColor.green
+                            mainScene.rootNode.addChildNode(node!)
+                            node?.position.x = 182.314 - distance * Float(moveIndex[counter][1])
+                            node?.position.y = 117.5
+                            node?.position.z = 31.681 - distance * Float(moveIndex[counter][0])
+                        }
+                        else {
+                            let node = Scene?.rootNode.childNode(withName: "Highlight_Check", recursively: true)
+                            node?.geometry?.firstMaterial?.diffuse.contents = UIColor.red
+                            mainScene.rootNode.addChildNode(node!)
+                            node?.position.x = 182.314 - distance * Float(moveIndex[counter][1])
+                            node?.position.y = 117.5
+                            node?.position.z = 31.681 - distance * Float(moveIndex[counter][0])
+                        }
+                        counter += 1
+                    }
+                    return
                 }
                 else{
-                    //if(resultchild.node.parent?.name! == "group_0"){
-                        //return
-                    //}
+                    if(resultchild.node.parent?.name! == "group_0"){
+                        return
+                    }
                     print("wrong turn")
                 }
              c += 1
             }
-        }
+                }
             
             else {//If second tap
                 //Reset tap count
-                let hitResults = sceneView.hitTest(p, options: [:])
-            if hitResults.count > 0{
-                print("What up man")
-                first = true
-                let resultchild: AnyObject = hitResults[0]
+                while hitResults.count > c {
+            deleteHightLights()
+                    print("What up man", c)
+                    first = true
+                    let resultchild: AnyObject = hitResults[c]
+                    c += 1
+                    if (resultchild.node == mainScene.rootNode) || resultchild.node.name == nil{
+                        print("continue")
+                    continue
+                    }
                 let vaildMove = myChessGame.move(resultchild: resultchild.node)
                 
                 //check if game's over
@@ -316,14 +366,28 @@ class GameViewController: UIViewController {
                     click2.play()
                     slide.play()
                     resumeGame() //dont prompt for pawn promotion if not possible
+                    return
                 }
-            }
-        }
-            
-            
+                    print(resultchild.node.name!)
+              if (resultchild.node.parent?.name! == "group_0") {
+                    return
+                }
+               
         }
         
-
+        }
+    }
+    func deleteHightLights(){
+        while (mainScene.rootNode.childNode(withName: "Highlight", recursively: true) != nil) {
+            mainScene.rootNode.childNode(withName: "Highlight", recursively: true)?.removeFromParentNode()
+        }
+        while (mainScene.rootNode.childNode(withName: "Highlight_Moves", recursively: true) != nil){
+            mainScene.rootNode.childNode(withName: "Highlight_Moves", recursively: true)?.removeFromParentNode()
+        }
+        while (mainScene.rootNode.childNode(withName: "Highlight_Check", recursively: true) != nil){
+            mainScene.rootNode.childNode(withName: "Highlight_Check", recursively: true)?.removeFromParentNode()
+        }
+    }
     
     func resumeGame(){
         //display checks if any
@@ -348,7 +412,7 @@ class GameViewController: UIViewController {
                 myChessGame.promote(pawnToBePromoted: Current, into: "Queen")
             }
             
-            displayCheckFunction()
+            //displayCheckFunction()
             
            // textOverlay.updateTurnOnScreen(whiteTurn: myChessGame.whiteTurn)
         }
@@ -404,17 +468,17 @@ class GameViewController: UIViewController {
     }
     
     //check to see if player is in check
-    func displayCheckFunction(){
-        let playerChecked = myChessGame.getPlayerChecked()
-        
-        //display a message that player is checked, if elegible
-        if playerChecked != nil {
-            textOverlay.display(text: playerChecked! + " is in check!")
-        }
-        else {
-            textOverlay.display(text: "nothing")
-        }
-    }
+//    func displayCheckFunction(){
+//        let playerChecked = myChessGame.getPlayerChecked()
+//
+//        //display a message that player is checked, if elegible
+//        if playerChecked != nil {
+//            textOverlay.display(text: playerChecked! + " is in check!")
+//        }
+//        else {
+//            textOverlay.display(text: "nothing")
+//        }
+//    }
     
     //func displayWinner
     //this function pops up a box and lets the user
@@ -462,6 +526,86 @@ class GameViewController: UIViewController {
         self.present(box, animated: true, completion: nil)
         
     }
+     @objc func moveCamera(usingGestureRecognizer gestureRecognizer: UIPanGestureRecognizer) {
+
+        switch gestureRecognizer.state{
+        case .began:
+                    print("here")
+            cameraNode.position = cameraPosition!
+            cameraNode.eulerAngles = cameraAngle!
+            cameraPosition = cameraNode.position
+            cameraAngle = cameraNode.eulerAngles
+            self.previousLoaction =  .zero
+        case .changed:
+
+            let previous = self.previousLoaction
+            let translation = gestureRecognizer.translation(in: gestureRecognizer.view)
+            let translationDelta = CGPoint(x:translation.x - previous.x, y:translation.y - previous.y)
+            let yScalar = Float(translationDelta.x / self.view.bounds.size.width)
+            let xScalar = Float(translationDelta.y / self.view.bounds.size.width)
+            if(cameraNode.position.x + yScalar*1.5 < 245 && cameraNode.position.x + yScalar*1.5 > 38){
+            cameraNode.position.x = cameraNode.position.x + yScalar*1.5
+            }
+            if(cameraNode.position.y + xScalar*2 - abs(yScalar) > 138 && cameraNode.position.y + xScalar*2 - abs(yScalar) < 330){
+            cameraNode.position.y = cameraNode.position.y + xScalar*2 - abs(yScalar)
+            }
+            if(cameraNode.eulerAngles.y + yScalar/60 > -1.5 && cameraNode.eulerAngles.y + yScalar/60 < 1.5){
+            cameraNode.eulerAngles.y = cameraNode.eulerAngles.y + yScalar/60
+            }
+            if(myChessGame.whiteTurn){
+                if(cameraNode.position.z + xScalar*2.5 + abs(yScalar) > -160 && cameraNode.position.z + xScalar*2.5 + abs(yScalar) < -33){
+                cameraNode.position.z = cameraNode.position.z + xScalar*2.5 + abs(yScalar)
+                }
+                if(cameraNode.eulerAngles.x - xScalar/60 + abs(yScalar/240) < 3.16 && cameraNode.eulerAngles.x - xScalar/60 + abs(yScalar/240) > 1.6){
+                cameraNode.eulerAngles.x = cameraNode.eulerAngles.x - xScalar/60 + abs(yScalar/240)
+                }
+            }
+            else{
+                cameraNode.position.z = cameraNode.position.z - abs(xScalar)*2 - abs(yScalar)*2
+                cameraNode.eulerAngles.x = cameraNode.eulerAngles.x - xScalar/60 - abs(yScalar/240)
+            }
+
+        case .ended:
+            print(cameraNode.position.x, cameraNode.position.y, cameraNode.position.z)
+            print(cameraNode.eulerAngles.x, cameraNode.eulerAngles.y, cameraNode.eulerAngles.z)
+//            return
+            cameraNode.position = cameraPosition!
+            cameraNode.eulerAngles = cameraAngle!
+        case .possible:
+            cameraNode.position = cameraPosition!
+            cameraNode.eulerAngles = cameraAngle!
+        case .cancelled:
+            cameraNode.position = cameraPosition!
+            cameraNode.eulerAngles = cameraAngle!
+        case .failed:
+            cameraNode.position = cameraPosition!
+            cameraNode.eulerAngles = cameraAngle!
+        }
+//        let translation = gestureRecognizer.translation(in: view)
+    }
+
+//
+    func pauseScreen() {
+        
+        dismiss()
+        
+    }
+    
+    func dismiss() {
+        
+        self.myChessGame.theChessBoard.r0 = []
+        self.myChessGame.theChessBoard.r1 = []
+        self.myChessGame.theChessBoard.r2 = []
+        self.myChessGame.theChessBoard.r3 = []
+        self.myChessGame.theChessBoard.r4 = []
+        self.myChessGame.theChessBoard.r5 = []
+        self.myChessGame.theChessBoard.r6 = []
+        self.myChessGame.theChessBoard.r7 = []
+        place = []
+        self.dismiss(animated: true, completion: nil)
+        
+    }
+    
 }
 
 
