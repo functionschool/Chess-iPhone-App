@@ -1,3 +1,7 @@
+# 3D Chess iOS Application
+
+<img src="images/screenshot.png">
+
 To compile this project, just open the main Folder in Xcode. Then Click Build.
 
 To install this project onto your iPhone, connect a USB to the computer. Then
